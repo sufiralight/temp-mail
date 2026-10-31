@@ -1,6 +1,6 @@
 # Premium UI and Blade component specification
 
-Status: planned, no shared product components implemented. [UX](ux.md) owns interactions; [Accessibility](accessibility.md) owns WCAG targets. Benchmark Stripe/Vercel/Linear quality without copying branding.
+Status: Phase 1 implements app/installation layouts, labels/inputs/password fields, buttons/cards/alerts, progress, validation, loading and the shared theme control. Other component families remain plans. [UX](ux.md) owns interactions; [Accessibility](accessibility.md) owns WCAG targets. Benchmark Stripe/Vercel/Linear quality without copying branding.
 
 ## Semantic tokens
 
@@ -35,7 +35,7 @@ Future single owner: resources/css/app.css, mapped to Tailwind utilities. No pag
 | Layout | Main max 1280px; auth 448px, installer 640px, settings 896px; page padding 16px mobile, 24–32px desktop |
 | Targets | Design around 44px controls; WCAG minimum and exceptions verified separately |
 
-Quiet neutral surfaces, teal active actions, subtle elevation, no excessive gradients/clutter. One primary action per task. Inter self-hosting is proposed, not installed; verify licensing/font assets and script fallback before Phase 1.
+Quiet neutral surfaces, teal active actions, subtle elevation, no excessive gradients/clutter. One primary action per task. Inter Variable is bundled locally through @fontsource-variable/inter (OFL license in the package); no third-party font requests. Script fallback remains required.
 
 ## Blade contracts (planned component names, not existing files)
 
@@ -64,8 +64,8 @@ Tables/CMS/modal families are planned now, built only when approved screens need
 
 **Compact permanently segmented icon-only selector:** Sun=Light, Moon=Dark, Monitor=System. No visible Light/Dark/System text inside the control, no labelled dropdown. Teal selected segment with shape/state beyond color. Same reusable Blade component in installer, auth, public, user and admin shells.
 
-Proposed semantics: three native radio inputs grouped by a visually hidden legend; icon labels and visually hidden choice names, native checked state. Tab enters/exits group, arrow keys move/select, Space selects; verify direction-aware order in RTL. Icons are decorative; accessible names remain Light, Dark, System. Tooltip appears on hover/focus outside the control, dismisses with Escape and remains hoverable; not the sole accessible name.
+Implemented semantics: three native radio inputs grouped by a visually hidden legend; icon labels and visually hidden choice names, native checked state. Tab enters/exits group, arrow keys move/select, Space selects; verify direction-aware order in RTL. Icons are decorative; accessible names remain Light, Dark, System. Tooltip appears on hover/focus outside the control, dismisses with Escape and remains hoverable; not the sole accessible name.
 
-One resolver stores allowlisted light/dark/system browser preference; missing/invalid defaults to System. An early small CSP-compatible bootstrap before stylesheet paint sets the resolved root theme/color-scheme. Main Alpine behavior uses the same resolver; no independent per-component logic. Resolve CSP nonce/hash strategy under D-04. Listen to OS changes only in System; storage events synchronize same-origin tabs and all controls. Catch storage errors, preserve in-memory operation, never persist sensitive inputs.
+One resolver stores allowlisted light/dark/system browser preference; missing/invalid defaults to System. An early small CSP-compatible bootstrap before stylesheet paint sets the resolved root theme/color-scheme. Main Alpine behavior uses the same resolver; no independent per-component logic. The early resolver is nonce-protected; bundled Alpine uses its CSP build. Listen to OS changes only in System; storage events synchronize same-origin tabs and all controls. Catch storage errors, preserve in-memory operation, never persist sensitive inputs.
 
 Without JS use prefers-color-scheme CSS and hide inactive enhancement controls with an accessible explanation; core forms stay usable. Storage is origin-local: localhost and 127.0.0.1 do not share it; account synchronization is not promised. Verify initial paint, reload, live OS changes, explicit override, corruption, blocked storage, multiple controls/tabs and CSP. No no-flash or contrast claim until browser evidence exists.

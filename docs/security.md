@@ -1,6 +1,6 @@
 # Security requirements
 
-Status: Phase 0 specification, not an implemented control set or security certification. [Installation](installation.md) uniquely owns installer transport/state; [Testing](testing.md) owns executable acceptance.
+Status: Phase 1 installer controls implemented; later identity/CMS/mail/billing controls remain specifications, not a security certification. [Installation](installation.md) uniquely owns installer transport/state; [Testing](testing.md) owns executable acceptance.
 
 | Boundary | Enforceable requirement | Required evidence |
 | --- | --- | --- |
@@ -35,3 +35,7 @@ Only public/ is served. Environment/state/config caches/logs/backups/quarantine 
 ## Incident handling
 
 Operator can disable ingestion/public registration or revoke compromised sessions/capabilities without reopening installer. Isolate affected resources, preserve minimal restricted audit evidence, rotate compromised provider credentials, restore matching DB/state/key backups and reconcile jobs/webhooks. Key rotation requires a reviewed data re-encryption/recovery plan. Define incident contacts, retention and notification duties with deployment jurisdiction; no legal compliance claim is made here.
+
+Phase 1 selects the approved single-node/tunnel strategy. An explicit two-hour operator-provisioned access profile and raw loopback peer check complement deployment isolation; they do not prove an SSH tunnel/firewall exists. Production setup remains disabled until provider/SSH/listener restrictions are confirmed. TLS certificate verification cannot be disabled by submitted fields or the production environment. Initial account uses Argon2id; role is fixed server-side, not client-selectable.
+
+Sensitive installer exceptions are rendered as translated safe categories without raw exception chains and are not reported with credential-bearing context. Config contains only the opaque installed driver; decrypted DB configuration exists in the private encrypted state and connection object, never a config dump. Password inputs are excluded from trimming/flashing. Error responses get no-store, CSP, framing denial, nosniff and no-referrer.

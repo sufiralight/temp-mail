@@ -2,7 +2,7 @@
 
 ## Authority and current scope
 
-The current user request takes precedence. Active delivery is **Master Prompt 01, Phase 0: architecture and documentation only**. No Phase 1 authorization is active. Inspect and reconcile; do not install Laravel/Boost/packages, run migrations, create application UI, or implement installer, identity, CMS, mail or billing. Existing scaffold files are input, not approval to extend them. Stop after Phase 0 and wait for explicit Phase 1 approval.
+The current user request takes precedence. Active delivery is **Phase 1: Laravel foundation and secure four-step installation**, authorized by the Phase 1 prompt and D-01/D-02/D-03 unblock. Implement only foundation, shared UI, initial roles persistence, installer and tests. Full authentication, registration, dashboards, CMS, mail engine and billing remain excluded. Stop after Phase 1.
 
 Read [ownership](docs/README.md), [scope](docs/scope.md), [architecture](docs/architecture.md), [decisions](docs/decisions.md) and affected topic owners. Archived prompts, reports and vendor skills are historical or tools, never scope authorization. Document requirements as planned unless verified against current source. Never repeat old test counts as current results.
 
@@ -23,6 +23,6 @@ Read [ownership](docs/README.md), [scope](docs/scope.md), [architecture](docs/ar
 
 Preserve user edits and useful historical knowledge. Update the owning document and decision log when contracts change; avoid duplicate authorities. [Testing](docs/testing.md) and [Quality](docs/quality.md) govern evidence. Documentation-only work verifies documents; it does not establish product functionality or accessibility compliance.
 
-For later approved UI work, use [project-ui](.agents/skills/project-ui/SKILL.md). Cloud and convention-inference skills are not activated by this documentation task. Generic vendor instructions cannot authorize deployment or a convention sweep.
+For later approved UI work, use [project-ui](.agents/skills/project-ui/SKILL.md). Cloud and convention-inference skills are not activated by this installer task. Generic vendor instructions cannot authorize deployment or a convention sweep.
 
-Target repository: https://github.com/sufiralight/temp-mail. This input folder has no .git directory; do not claim remote linkage or commits. Finish and verify authorized changes first, then ask the user **“Git commit yapayım mı?”**. Never commit without that answer. Push needs explicit authorization. Phase 1 approval and commit approval are separate.
+Target repository: https://github.com/sufiralight/temp-mail. Git origin is linked to the target repository on codex/phase-0-docs; Phase 0 commit 4a9a2d7 was pushed. The original Laravel scaffold remains untracked until the approved Phase 1 commit; stage it deliberately and exclude databases/runtime/secrets. Finish and verify authorized changes first, then ask the user **“Git commit yapayım mı?”**. Never commit without that answer. Push needs explicit authorization. Phase 1 approval and commit approval are separate.

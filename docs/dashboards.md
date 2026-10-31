@@ -1,6 +1,6 @@
 # Dashboard specification
 
-Status: planned minimal Phase 2 role destinations; admin functionality remains Phase 4 and mailbox dashboard Phase 8. No dashboard or product installer route exists in inspected source. Verification gate is proposed under D-06. [Identity](authentication-authorization.md) exclusively owns route/role access. [UX](ux.md) owns general interactions and [UI system](ui-system.md) owns shared presentation.
+Status: planned minimal Phase 2 role destinations; admin functionality remains Phase 4 and mailbox dashboard Phase 8. No dashboard exists; only installer routes and an honest /login handoff are implemented in Phase 1. Verification gate is proposed under D-06. [Identity](authentication-authorization.md) exclusively owns route/role access. [UX](ux.md) owns general interactions and [UI system](ui-system.md) owns shared presentation.
 
 ## User dashboard
 

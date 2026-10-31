@@ -1,6 +1,6 @@
 # Account settings specification
 
-Status: proposed Phase 2 brief; no account settings or installer product feature exists in inspected source. Detailed field limits and verification policy need Phase 2 review. [Identity](authentication-authorization.md) owns authentication/roles; [Security](security.md) owns secret/session controls.
+Status: proposed Phase 2 brief; no account settings exist; the installer foundation is Phase 1. Detailed field limits and verification policy need Phase 2 review. [Identity](authentication-authorization.md) owns authentication/roles; [Security](security.md) owns secret/session controls.
 
 All authenticated roles, including unverified users, can access their own `/account`. Provide real URL subnavigation for Profile, Security and Appearance, server-allowlisted section values and current-page semantics. Render affected sections/errors predictably after validation and success. Independent mutations use independent forms/error bags; one submit cannot accidentally change unrelated security state.
 

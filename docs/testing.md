@@ -1,6 +1,6 @@
 # Testing strategy and evidence
 
-Status: Phase 0 documentation. No application tests, build, migrations, browser runs or accessibility audit executed for this delivery. Historical counts in archived reports are not current evidence.
+Status: Phase 1 test strategy and executed evidence. Historical reports remain non-authoritative; actual current results appear below.
 
 ## Strategy
 
@@ -42,6 +42,19 @@ Tests isolate database, private state, config/cache/session directories, storage
 16. APP_KEY unchanged, existing/populated database protected, non-destructive probe and no secrets in error/log/cache/flash.
 17. Production gateway/private access passes only under approved profile; bypassing origin, expired edge session and unknown topology deny.
 
-## Current executed evidence
+## Executed Phase 1 evidence — 2026-10-31
 
-Read-only PHP/Composer version checks, file/dependency inspection and official compatibility reference review were executed. Documentation verification (link paths/fragments, registry count, archive hashes, changed-path scope and wording) is recorded in [Phase 0 audit](phase-0-audit.md) after checks complete. Git checks are unavailable because this directory is not a Git checkout. No test/build pass or product security/UX/WCAG conformance is claimed.
+- PHP 8.5.12, Composer 2.10.3, locked Laravel v13.39.0; Node 24.22.1/npm 11.19.1, Vite 8.3.5. Installed @alpinejs/csp 3.17.5, @fontsource-variable/inter 5.3.0 and @playwright/test 1.64.1. No PHP dependency changes.
+- PHPUnit: 48 tests / 135 assertions passed with a real isolated MySQL 8.4.13 server. This includes MySQL TLS probe/migrations/receipt/completion, wrong CA rejection, preservation of populated target, two competing independent PHP workers, and recovery after schema migration before account commit. SQLite workflow fixtures are separately named and do not count as MySQL qualification.
+- Feature/security cases cover both approved local origins and both APP_URL mismatch combinations, raw IPv6 loopback, spoofed remote/Host/forwarded headers, wrong ports, missing/disabled/expired/corrupt state, step order, requirements, DB failure/redaction, invalid Super Admin/role tampering, session/proof ownership/expiry, durable lock, no credential UI, completed-state renewal rejection probe rate limiting, enforced production TLS opt-out refusal and partial-DDL recovery refusal.
+- Independent config:cache serialization and fresh-process query test passed without serializing the fixture DB password. The original .env/APP_KEY/configured DB were not changed.
+- Chrome headless browser runs completed all four steps against real MySQL with verified TLS, both JavaScript enabled and disabled. The browser server bound only to 127.0.0.1:18083 and used private disposable state/session/cache/view directories. Separate localhost/IP session cookies were checked; APP_URL used localhost while the IP alias remained usable.
+- Enhanced browser checks: light/dark/system, reload, OS changes, explicit choice, keyboard arrows, tooltip Escape, cross-tab sync, blocked storage, password Show/Hide accessible names, validation-summary focus and blank password after errors, actual CSRF rejection (419), locked installer (410), no fake login form, 320/360/768/1440px reflow, selected light/dark token contrast and reduced-motion environment. Expected HTTP denial console messages are excluded from unexpected JS/CSP failures; their statuses are asserted separately.
+- Native forms completed the four steps with JavaScript disabled. The no-JS login handoff also reflowed at 320px. No public registration/dashboard/password-reset route was added.
+- Production frontend build passed. npm audit reported 0 vulnerabilities; Pint passed after formatting. Final document links/archive integrity and Git whitespace checks are recorded in the delivery report.
+
+Visual review inspected Light desktop requirements and Dark 360px administrator forms from actual Chrome screenshots. They use empty password fields. QA images and MySQL binaries/data/certificates remain ignored under storage/framework/testing, not Git assets. Automated interaction and manual screenshot review are distinct evidence; no user study or WCAG certification is claimed.
+
+Reproduce application tests with php vendor/bin/phpunit. Live MySQL cases require explicit MYSQL_INSTALLATION_TEST_PORT and MYSQL_INSTALLATION_TEST_CA pointing to a disposable loopback 8.4 instance; otherwise those tests skip honestly. They create/drop only random temp_mail_test_* databases. Browser tests use node tests/browser/installer.mjs; the same two variables select real MySQL, otherwise an explicitly labelled SQLite workflow fixture is used. Set NATIVE_ONLY=1 for the full no-JS flow. A disposable MySQL root account in this isolated test harness is never a production credential recommendation.
+
+Limits: no production hosting/SSH/firewall/gateway verification, real external CA deployment, service-account NTFS ACL certification, filesystem power-loss test, full backup restore, native screen reader, Safari/Firefox or complete WCAG 2.2 AA audit. Responsive reflow checks are not a 400% zoom/200% text certification. Early nonce bootstrap runs before stylesheet paint by construction; no filmstrip-based first-paint measurement was performed. Phase 2 identity/mail/session revocation features remain unimplemented.

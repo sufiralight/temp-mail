@@ -1,6 +1,6 @@
 # Secure installer specification
 
-Status: planned Phase 1; no installer exists in inspected source. [Security](security.md) owns common security controls. [Operations](operations.md) owns deployment access/recovery.
+Status: Phase 1 implementation; actual tests and qualification limits are in Testing. [Security](security.md) owns common security controls. [Operations](operations.md) owns deployment access/recovery.
 
 ## Exact user journey
 
@@ -34,7 +34,7 @@ Docker/WSL/VM bridges commonly expose non-loopback peers or forward remote traff
 
 Installation is disabled by default. Choose a deployment-controlled private network with enforced operator access, authenticated infrastructure gateway or restricted SSH tunnel. HTTPS is required for non-loopback transport. Gateway authentication must be applied to every installer path and method; firewall the origin against bypass. The edge strips client-supplied identity/forwarded fields and replaces only documented assertions; trust only exact reviewed proxy peers. The application does not accept an arbitrary identity header as authorization.
 
-A restricted tunnel can carry browser traffic to an otherwise inaccessible listener; it is a distinct deployment-authorized profile, not an APP_ENV shortcut. Define edge/session expiry and access revocation. Public direct HTTPS plus a canonical hostname is insufficient. If the topology or gate cannot be verified, deny and instruct the operator to enable a private approved path. Details are D-03; production remains blocked until resolved.
+A restricted tunnel can carry browser traffic to an otherwise inaccessible listener; it is a distinct deployment-authorized profile, not an APP_ENV shortcut. Define edge/session expiry and access revocation. Public direct HTTPS plus a canonical hostname is insufficient. If the topology or gate cannot be verified, deny and instruct the operator to enable a private approved path. D-03 approves this strategy. Hosting provider, actual SSH access, listener isolation/firewall and tunnel setup remain deployment prerequisites; production installation stays disabled until confirmed.
 
 ## Sessions and CSRF
 
@@ -44,7 +44,7 @@ Use Laravel CSRF and session rotation at consequential transitions; bind databas
 
 ## Lifecycle and durable state
 
-Proposed state machine: unprovisioned → requirements_passed → database_verified → admin_ready → finalizing → completed; failures after writes enter recovery_required. Unknown/corrupt/mismatched state blocks all normal setup. Pre-database sessions/cache/state must not query unavailable application tables.
+Implemented durable phases: fresh → verified → ready → finalizing → completed; requirements are checked live before database access and completion; failures after writes enter recovery_required. Unknown/corrupt/mismatched state blocks all normal setup. Pre-database sessions/cache/state must not query unavailable application tables.
 
 Requirements inspect actual PHP/extensions, key validity, private storage/locks, selected MySQL PDO/TLS capability and deployment profile. Do not require or regenerate a new key when one exists. Errors give actionable categories without connector messages/DSNs/passwords.
 
@@ -58,6 +58,20 @@ Persist selected credentials only through the reviewed encrypted configuration/s
 
 No single transaction spans MySQL DDL, database receipt and filesystem/config. Crash tests must cover each boundary. After failure, keep the exact target/attempt/key; an operator inspects checkpoints and reconciles receipts before resuming. Partial DDL needs reviewed repair or matching backup restoration, not migrate:fresh. Account already committed means reuse its receipt; never create another Super Admin. A completed installation has no web reopen/reset mechanism.
 
-Choose durable state, provisioned manifest and lock scope under D-02. Single-node private disk cannot safely coordinate independent ephemeral replicas. Filesystem atomic rename alone does not prove power-loss durability. Operator/host compromise and a misconfigured gateway are outside what application peer checks can solve. These limitations must remain visible in deployment acceptance.
+D-02 selects encrypted private files, a provisioned sentinel and cross-process OS flock on one persistent node. Single-node private disk cannot safely coordinate independent ephemeral replicas. Filesystem atomic rename alone does not prove power-loss durability. Operator/host compromise and a misconfigured gateway are outside what application peer checks can solve. These limitations must remain visible in deployment acceptance.
 
-Required executable cases are in [Testing](testing.md); none has been executed for this planned feature.
+Required executable cases and actual current results are in [Testing](testing.md); infrastructure isolation requires separate deployment evidence.
+
+## Implemented operator and state contract
+
+Set INSTALLATION_ENABLED=true only after confirming the listener is bound exclusively to loopback and no public proxy forwards to it. Run install:prepare --profile=local --port=8000 --restricted for local development, or the ssh-tunnel profile with debug disabled for a confirmed tunnel. This CLI is an infrastructure attestation, not an authentication token issuer; it creates no user-facing authorization step or password. Access expires after two hours. --renew preserves the original profile/port/state and never reopens completed installation.
+
+Private state defaults to storage/app/private/installation with a provisioned sentinel, encrypted state and lock. Provisioning cannot replace an existing marker/state. Missing/corrupt state fails closed. Windows ACLs must restrict this directory to the operator/service account; chmod alone is not an NTFS ACL qualification. Atomic replacement uses bounded retries for transient Windows file holds without unlinking the previous durable state. Power-loss guarantees still depend on filesystem and coordinated backups.
+
+Database proof expires after ten minutes and belongs to one host-local session. Re-probing invalidates old credentials/proof/admin first, even for invalid input. Production always requires a configured readable CA, verification enabled and a negotiated TLS cipher. Driver/hosts/port are allowlisted by operator config; database identifiers are constrained. Current engine target is MySQL 8.4.x, not MariaDB. Probe never migrates; completion alone runs the four explicit migration paths.
+
+Interrupted finalizing state blocks web setup. After backing up and inspecting the original target, install:recover --reviewed verifies exact migration names, source fingerprint, required tables/columns and same-attempt receipt. It seals an already committed Super Admin or allows administrator re-entry only for complete expected schema with no users/receipt. An authorized session can claim that recovered attempt at /install/admin. Partial DDL stays blocked for reviewed repair/restore; no automatic destructive reset. Use --renew only after reconfirming restrictions if access expired.
+
+The app verifies request-level facts and explicit operator attestation, not SSH/firewall configuration. Public proxy-to-loopback is unsafe even if headers are stripped. No generic reverse-proxy profile is implemented; equivalent infrastructure strategies need separate review/tests. No provider or SSH availability is assumed.
+
+An already recovered schema-ready attempt can be reviewed/recovered again if its administrator proof expires; this revalidates the same schema and clears ownership/pending administrator, never migrates or selects another target.

@@ -1,6 +1,6 @@
 # Authentication and authorization specification
 
-Status: planned Phase 2; inspected source has no product roles or installer-created administrator. All behavior below is planned. Mandatory dashboard verification is a recommendation pending D-06, not a newly approved product requirement. Use Laravel session identity, password broker and signed verification primitives; Blade owns screens. [Decisions](decisions.md) records choices; [Security](security.md) owns common controls.
+Status: planned Phase 2; Phase 1 now has a role enum/default User and installer-only Super Admin creation, but no full identity implementation. All behavior below is planned. Mandatory dashboard verification is a recommendation pending D-06, not a newly approved product requirement. Use Laravel session identity, password broker and signed verification primitives; Blade owns screens. [Decisions](decisions.md) records choices; [Security](security.md) owns common controls.
 
 ## Authentication lifecycle
 

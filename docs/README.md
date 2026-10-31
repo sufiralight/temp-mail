@@ -1,6 +1,6 @@
 # Documentation ownership map
 
-Status: Master Prompt 01 / Phase 0, 2026-10-31. All product behavior is planned unless the inspection audit explicitly identifies existing source. [AGENTS](../AGENTS.md) is the central instruction entry point.
+Status: approved Phase 1 foundation/installer, 2026-10-31. Topic owners distinguish implemented installer behavior from deferred product requirements; Testing contains current evidence. [AGENTS](../AGENTS.md) is the central instruction entry point.
 
 | Owner | Responsibility |
 | --- | --- |
@@ -20,7 +20,7 @@ Status: Master Prompt 01 / Phase 0, 2026-10-31. All product behavior is planned 
 | [Quality](quality.md) | Delivery and verification gate |
 | [Account](account.md), [Dashboards](dashboards.md) | Deferred Phase 2 account and workspace briefs |
 | [Phase 0 audit](phase-0-audit.md) | Source inventory, reconciliation classifications and changed files |
-| [Phase 1 report](phase-1-report.md) | Explicit withdrawal of unsupported old delivery claims |
+| [Phase 1 report](phase-1-report.md) | Current source inventory/results; older unsupported claims remain archived |
 | [Archive](archive/README.md) | Immutable historical inputs and hash manifests |
 
 Each requirement has one owner. Cross-references summarize without overriding the owner. Update affected acceptance criteria and significant decisions together. Archived implementation claims never establish current source behavior.

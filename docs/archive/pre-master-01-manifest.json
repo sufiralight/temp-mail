@@ -1,0 +1,117 @@
+[
+  {
+    "path": "docs/accessibility.md",
+    "bytes": 2641,
+    "sha256": "f0d44d81d69d8e9da5e5267d84ea319477a67781a59cf06980faaf95f1fb7aab"
+  },
+  {
+    "path": "docs/account.md",
+    "bytes": 2905,
+    "sha256": "1d09c57db7abfced64023ca8719e37f7b4694358aa759b93b029ac1ec95d9b45"
+  },
+  {
+    "path": "docs/architecture.md",
+    "bytes": 4472,
+    "sha256": "cbd462a23498faec4ee7241be386870dc519b0461611a4fe70f00a569ce8a7a9"
+  },
+  {
+    "path": "docs/authentication-authorization.md",
+    "bytes": 5753,
+    "sha256": "606be820c1d26d377d671eee3e6489d23b33d65cab9327d7b8a3a5352c362bcf"
+  },
+  {
+    "path": "docs/dashboards.md",
+    "bytes": 1979,
+    "sha256": "a492fb44073fe798beedf9dfcac041815f04dda425a82cdf875d50a41134a956"
+  },
+  {
+    "path": "docs/decisions.md",
+    "bytes": 8006,
+    "sha256": "d81e31ca14c4f3e3a67b372de31e3cdc5803b5138e1b81defd1bd0cea68f4bc4"
+  },
+  {
+    "path": "docs/future-requirements.md",
+    "bytes": 5466,
+    "sha256": "50e9b33f29b24f454cd7ebc7e7709342cbb2d42598531e61971af878c2035b70"
+  },
+  {
+    "path": "docs/installation.md",
+    "bytes": 8713,
+    "sha256": "1786fabb2a3d631023fa4c5ff904a6681d6570670312739bedb97c13587abdd3"
+  },
+  {
+    "path": "docs/internationalization.md",
+    "bytes": 3405,
+    "sha256": "240c5b5716ea525debdb0b4a0682f64074ba296a187d783202fc1dca80bab4bd"
+  },
+  {
+    "path": "docs/operations.md",
+    "bytes": 10235,
+    "sha256": "ad0779a62ea897c79555584bee2c2acb3f96adaf00d5ab24bf2257b0cb106a0c"
+  },
+  {
+    "path": "docs/phase-0-audit.md",
+    "bytes": 7490,
+    "sha256": "2013dae19b4e9aacb915367a0c7f42aa9b537698a5af0e8a1ea943973380e344"
+  },
+  {
+    "path": "docs/phase-1-report.md",
+    "bytes": 8071,
+    "sha256": "585d7d4fc5e6675c6032e526671b4311cdcb802f934d55b36b73d2d4b8bade82"
+  },
+  {
+    "path": "docs/quality.md",
+    "bytes": 2215,
+    "sha256": "8ee6aa87fc455538a335952a60ca477d71f189814eb06ce5f9618e997628e68e"
+  },
+  {
+    "path": "docs/README.md",
+    "bytes": 2654,
+    "sha256": "6850cc3f21d76f17eda221479a3e8f7f4d00d7c2fdaf6c1acc7f9e7c6cf39d1c"
+  },
+  {
+    "path": "docs/scope.md",
+    "bytes": 3615,
+    "sha256": "9fe20cef2cebe79675fe2cd350316e5e79b90e3e91b196d0f056f6291ac4f020"
+  },
+  {
+    "path": "docs/security.md",
+    "bytes": 5317,
+    "sha256": "d601ff2ebc6f0575cb50196134a353c07c8b8489bf25192151ee8ac9ce75f2ef"
+  },
+  {
+    "path": "docs/testing.md",
+    "bytes": 13208,
+    "sha256": "ee915d145acb6d9c918241adee71dd665375c96b1acb581f9823e721b19f3fb0"
+  },
+  {
+    "path": "docs/ui-system.md",
+    "bytes": 7232,
+    "sha256": "4a9ab88fb397b5d1b294e83369cbba2adf575b686ce2ab18fb9c7611ffd0322d"
+  },
+  {
+    "path": "docs/ux.md",
+    "bytes": 4121,
+    "sha256": "dcbd5fbc79a89d9412733937aa16e563ceb95a8a999394c77acbc5246daa9c81"
+  },
+  {
+    "path": "AGENTS.md",
+    "bytes": 4984,
+    "sha256": "a583973ae8e12094e8253f13e99fc0132c8db2e74bd99d77b623682714b69b52"
+  },
+  {
+    "path": "CLAUDE.md",
+    "bytes": 1446,
+    "sha256": "fc7f68b818002266982ebc3e423826ce67988c1edb4532bb1b086a17744cd890"
+  },
+  {
+    "path": "README.md",
+    "bytes": 3700,
+    "sha256": "1ed7f729d514ddbddaac5944a07298c3c896099ae3cab8667030145cf8ff0e47"
+  },
+  {
+    "path": ".agents/skills/project-ui/SKILL.md",
+    "bytes": 1200,
+    "sha256": "b091c5a81d2fc5f4516256c462f10928e2b88b9bdac68243074b2771b03c18ae"
+  }
+]

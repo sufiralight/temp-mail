@@ -1,0 +1,167 @@
+[
+  {
+    "path": "docs/accessibility.md",
+    "sha256": "63e0241345c81606bdf11bac742fdcbc1574f94227d82298350f9ae134faa6eb",
+    "bytes": 1701
+  },
+  {
+    "path": "docs/account.md",
+    "sha256": "c5bf163415ccc94db092ba60b13a9e30a8173943c8c1f3a8827866b7de8f408e",
+    "bytes": 6563
+  },
+  {
+    "path": "docs/architecture.md",
+    "sha256": "202d7681c50379a68050cda235d9fd5ba65983186fb0f7e4fff505ef565ad583",
+    "bytes": 7867
+  },
+  {
+    "path": "docs/blog.md",
+    "sha256": "5f811e1c45e67bfea3da52899450643637dae22d8b9895501ab9682a3cacf79a",
+    "bytes": 8287
+  },
+  {
+    "path": "docs/cms-completion.md",
+    "sha256": "5a9c9d5d155c404b938998756653d2a3a9e39e75c887d7ec1869a7eace182ddf",
+    "bytes": 3787
+  },
+  {
+    "path": "docs/content-translations.md",
+    "sha256": "966792a6912e640eab19b354a0ef95f0f559d79969ce5010549d538aaf2c24d9",
+    "bytes": 6398
+  },
+  {
+    "path": "docs/decisions.md",
+    "sha256": "cd22f219b2e9205c38b4bf4351ab9b1e7a76791720be1348b98999fe0c1d04d5",
+    "bytes": 24846
+  },
+  {
+    "path": "docs/design-audit.md",
+    "sha256": "63ab9c6f70f4ba94ce0f43acfb5783c0c84435b0dc896f2355ddc188dde61672",
+    "bytes": 860
+  },
+  {
+    "path": "docs/images.md",
+    "sha256": "038b84837f4d5ba1e2809d40cfaeecc3f01d54cb66ad096bf1eb88b4f017b28e",
+    "bytes": 6127
+  },
+  {
+    "path": "docs/internationalization.md",
+    "sha256": "8f9f4a909bdfff1efc6bad2b1fdf8cf590b39def26b84ec1a86ff4768c964400",
+    "bytes": 2452
+  },
+  {
+    "path": "docs/languages.md",
+    "sha256": "748049be95e887b9db226c36901a50df5b852ee1442b5df79aa348463a2fdfed",
+    "bytes": 6108
+  },
+  {
+    "path": "docs/operations.md",
+    "sha256": "9a42ce3686bf73bdf75221914a5df83670b33459f38601e3982e42c1360621d5",
+    "bytes": 12137
+  },
+  {
+    "path": "docs/pages.md",
+    "sha256": "5f419b0db15ed3d00400297ad256a2f273fa434a02befe87e68f1a8f15befa0a",
+    "bytes": 1831
+  },
+  {
+    "path": "docs/public-ui.md",
+    "sha256": "b18eb79a9e80ad5bb8fbafb188c9685c6405b5f2ebfee9b3347448e871ee2788",
+    "bytes": 2715
+  },
+  {
+    "path": "docs/quality.md",
+    "sha256": "e7f1c8e3914f0eca61df0598c3c720dd6e0fd50515207cd2f53bfa454a41882a",
+    "bytes": 3958
+  },
+  {
+    "path": "docs/scope.md",
+    "sha256": "1ebccb0668564599693f786dd4b767e1e228b0301a63bf54f45b6ef91773c711",
+    "bytes": 7131
+  },
+  {
+    "path": "docs/security.md",
+    "sha256": "4e1ac5ffbc38e4760693aee29b8ebb17491d7b5a9d417be8414db88fe6af791b",
+    "bytes": 9688
+  },
+  {
+    "path": "docs/testing.md",
+    "sha256": "de6c644d6ee6f5e0570ab749192227ce8d4ddba9aff0a188588eec78e3eaf031",
+    "bytes": 43108
+  },
+  {
+    "path": "docs/ui-system.md",
+    "sha256": "14fd93a625afc65672ee6a84d60351155f995a28069bedc3cb3b480d871ab4a5",
+    "bytes": 6072
+  },
+  {
+    "path": "docs/ux.md",
+    "sha256": "c79685900d9854102cc9313f5e7032de659a0ea700cb2c0df9bbddacac191894",
+    "bytes": 7092
+  },
+  {
+    "path": "docs/prompts/2026-10-29-cms-completion.md",
+    "sha256": "2630aa8d72ab6ab8376755aaffd322ede8d72f1b47696ef549a2577ba8cfa8eb",
+    "bytes": 9309
+  },
+  {
+    "path": "docs/prompts/2026-10-29-design-foundation.md",
+    "sha256": "595de4d401fa7824f2b848428a156ecf0f617e65abb1808db7bc103237fd9ecc",
+    "bytes": 13661
+  },
+  {
+    "path": "docs/prompts/2026-10-29-language-table.md",
+    "sha256": "81c3dddd219da84886e6e9d82620654f715e7e95d5457955882bd09c958d5281",
+    "bytes": 9381
+  },
+  {
+    "path": "docs/prompts/2026-10-29-multilingual-cms.md",
+    "sha256": "195111863821156cb5dc6b2ed27809c9c6ba843ab9b3797d1bd19f7d00909a7d",
+    "bytes": 20371
+  },
+  {
+    "path": "docs/prompts/2026-10-29-premium-replacement.md",
+    "sha256": "8829149c5a3fa72a270f515410053cb084fcf01c247fd8abe21f788920e69ee4",
+    "bytes": 581
+  },
+  {
+    "path": "docs/prompts/2026-10-29-translation-editor.md",
+    "sha256": "c79bbfa12b473485f7a39af9572040463a779634cf2496ff4a7029b7e8d830dd",
+    "bytes": 11194
+  },
+  {
+    "path": "docs/prompts/2026-10-29-ux-rule-reconstruction.md",
+    "sha256": "12bf13e76a5c326b3f17de043aa7f7d1e1f489b5903ad774647ce749040d56e5",
+    "bytes": 514
+  },
+  {
+    "path": "docs/prompts/2026-10-30-content-studio.md",
+    "sha256": "e8aa34cfb8ab8637345e45b902c880e70ff1b3efabd180db76886d492bb6d87b",
+    "bytes": 376
+  },
+  {
+    "path": "docs/prompts/2026-10-30-multilingual-ux-contract.md",
+    "sha256": "6ba4be322c39fe38fc0d3d08975d0ff203e17dcfd693321d8505c0563b1ff8ad",
+    "bytes": 13017
+  },
+  {
+    "path": "docs/prompts/README.md",
+    "sha256": "2093daf248bc31d52042b9925251f4f7eab6f4ee420ddfea95fcb04c1459cd46",
+    "bytes": 1680
+  },
+  {
+    "path": "AGENTS.md",
+    "sha256": "c78d2e3fabc71cd2ebe5e9f422ad625db1536227e3527703096cfa5171044823",
+    "bytes": 7195
+  },
+  {
+    "path": "CLAUDE.md",
+    "sha256": "e741aac3699a5c9604a697a5b4711b80c500cc725b33686d3ffb053cbd871125",
+    "bytes": 6175
+  },
+  {
+    "path": ".agents/skills/project-ui/SKILL.md",
+    "sha256": "b091c5a81d2fc5f4516256c462f10928e2b88b9bdac68243074b2771b03c18ae",
+    "bytes": 1200
+  }
+]

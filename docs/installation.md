@@ -15,7 +15,7 @@ Keep evidence of completed setup outside `.env` so deleting the file preserves t
 
 ### Prompt 01 handoff
 
-The read-only entry point recognizes `storage/app/private/installation.state` containing `complete` as completion evidence. Setup does not write this marker yet. An invalid marker, unavailable private storage, or cached configuration with both `.env` and the marker missing leads to **Installation status unavailable**. Confirm the database engine, durable state and installation identity, and operator authorization before enabling setup actions.
+The entry point recognizes the private `storage/app/private/installation.state` record independently of `.env`. An invalid record, unavailable private storage, or cached configuration with both `.env` and the record missing leads to **Installation status unavailable**.
 
 ## First installation
 
@@ -23,6 +23,14 @@ The read-only entry point recognizes `storage/app/private/installation.state` co
 2. **Create your admin account.** Show **Database connected** with an **Edit** action. Changing the connection details requires a fresh test. Collect **Full Name**, **Email Address**, **Password**, and **Confirm Password**. **Finish Installation** prepares the database, creates the initial admin, and saves the configuration. Lock installation once these operations succeed, then redirect to `/login` with **Installation complete. Sign in to continue.**
 
 Protect setup actions with CSRF protection, rate limiting, and server-side checks. Only an authorized operator should be able to run a web installation on a public deployment. Handle retries and concurrent submissions so they cannot create duplicate administrators or mark a partial installation complete. Keep credentials and internal exceptions out of user-facing errors and logs.
+
+### Operator preparation
+
+- Create a dedicated, empty MySQL or MariaDB database and a user with permissions to read, write, and migrate its schema. The PHP runtime must have `pdo_mysql` enabled. Use the hosting panel's TCP host and port. Environment variables set by the hosting process must allow `.env` to supply the application key and database settings.
+- Generate a random 32-byte key and save its 64 hexadecimal characters in `storage/app/private/installation.key` using the hosting file manager. For local development, generate the value with `php -r "echo bin2hex(random_bytes(32)), PHP_EOL;"`. Keep the key private and provide it in the installer before the first connection test. Use HTTPS on a public deployment.
+- Give the PHP process write access to private storage and permission to atomically replace `.env` and clear a cached configuration. The installer preserves existing `.env` settings outside its managed block and disables debug output when activating the new configuration.
+
+A pending state records the selected database and an installation identifier. The matching database record tracks the original administrator so an interrupted install can resume on the same target. The completion marker is saved after the database and `.env` are ready. Prompt 03 uses a temporary Blade completion page at `/login`, which Prompt 07 replaces with sign-in.
 
 ## Restore configuration
 
@@ -50,6 +58,5 @@ Reuse the first-installation forms and application services. Verify that the tar
 
 ## Open decisions
 
-- Select the supported database engines and minimum hosting requirements.
-- Choose how operators establish authority on public deployments and how setup state and installation identity are stored.
+- Verify the minimum MySQL/MariaDB and shared-hosting requirements against the deployment target.
 - Define how operators back up and restore sensitive configuration, including the existing application key, before finalizing the recovery procedure.

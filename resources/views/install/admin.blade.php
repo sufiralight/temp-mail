@@ -11,7 +11,7 @@
         @endisset
     </x-installation.status>
 
-    <x-installation.form :action="$action ?? null" :error="$formError ?? null" submit="Finish Installation">
+    <x-installation.form :action="$action ?? null" :error="$formError ?? null" :csrf-token="$csrfToken ?? null" submit="Finish Installation" busy-label="Installing…">
         <x-installation.field name="name" label="Full Name" :value="$values['name'] ?? null" :error="$fieldErrors['name'] ?? null" autocomplete="name" required />
         <x-installation.field name="email" label="Email Address" type="email" :value="$values['email'] ?? null" :error="$fieldErrors['email'] ?? null" autocomplete="email" required />
         <x-installation.field name="password" label="Password" type="password" :hint="$passwordHint ?? 'Use a unique password for this administrator account.'" :error="$fieldErrors['password'] ?? null" autocomplete="new-password" required />

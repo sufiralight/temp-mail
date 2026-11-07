@@ -6,9 +6,14 @@
     <x-installation.form
         :action="$action ?? null"
         :error="$formError ?? null"
+        :csrf-token="$csrfToken ?? null"
         submit="Test Connection & Continue"
-        pending-note="Connection testing will be available once setup actions are enabled."
+        busy-label="Testing connection…"
+        pending-note="Add an installation key in private storage to enable setup."
     >
+        @if ($needsKey ?? false)
+            <x-installation.field name="installation_key" label="Installation Key" type="password" password-label="installation key" :error="$fieldErrors['installation_key'] ?? null" autocomplete="off" required />
+        @endif
         <x-installation.database-fields :values="$values ?? []" :field-errors="$fieldErrors ?? []" />
 
         <details class="installer-help">

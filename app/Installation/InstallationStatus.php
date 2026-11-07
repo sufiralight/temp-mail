@@ -6,13 +6,13 @@ use Illuminate\Foundation\Application;
 
 class InstallationStatus
 {
-    public function __construct(private readonly Application $app) {}
+    public function __construct(private readonly Application $app, private readonly InstallationFiles $files) {}
 
     public function current(): InstallationState
     {
         $privateDirectory = $this->app->storagePath('app/private');
-        $marker = $privateDirectory.'/installation.state';
-        $environment = $this->app->environmentPath().'/.env';
+        $marker = $this->files->statePath();
+        $environment = $this->files->environmentPath();
 
         if (! is_dir($privateDirectory) || ! is_readable($privateDirectory)) {
             return InstallationState::Uncertain;
@@ -26,7 +26,13 @@ class InstallationStatus
             return InstallationState::Fresh;
         }
 
-        if (is_link($marker) || ! is_file($marker) || trim((string) @file_get_contents($marker, length: 32)) !== 'complete') {
+        $record = ! is_link($marker) && is_file($marker) ? trim((string) @file_get_contents($marker, length: 128)) : '';
+
+        if (preg_match('/\Apending [0-9a-f-]{36} [0-9a-f]{64}\z/', $record) === 1) {
+            return InstallationState::Fresh;
+        }
+
+        if ($record !== 'complete' && preg_match('/\Acomplete [0-9a-f-]{36}\z/', $record) !== 1) {
             return InstallationState::Uncertain;
         }
 

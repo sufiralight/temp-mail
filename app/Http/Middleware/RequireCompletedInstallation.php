@@ -25,11 +25,15 @@ class RequireCompletedInstallation
             return $next($request);
         }
 
+        $state = $this->installation->current();
         if ($request->is('install', 'install/*')) {
-            return new Response(status: 404);
+            $setupRoute = ($request->isMethodCacheable() && $request->is('install/admin'))
+                || ($request->isMethod('POST') && $request->is('install/database', 'install/admin'));
+
+            return $state === InstallationState::Fresh && $setupRoute ? $next($request) : new Response(status: 404);
         }
 
-        if ($this->installation->current() === InstallationState::Installed) {
+        if ($state === InstallationState::Installed) {
             return $next($request);
         }
 

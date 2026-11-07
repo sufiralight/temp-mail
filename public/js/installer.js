@@ -64,6 +64,25 @@
             });
         }
 
+        for (const form of document.querySelectorAll('form[data-busy-label]')) {
+            const button = form.querySelector('[type="submit"]');
+            const label = button.querySelector('[data-submit-label]');
+            const status = form.querySelector('[data-submit-status]');
+            const original = label.textContent;
+
+            form.addEventListener('submit', () => {
+                button.disabled = true;
+                label.textContent = form.dataset.busyLabel;
+                status.textContent = form.dataset.busyLabel;
+            });
+
+            window.addEventListener('pageshow', () => {
+                button.disabled = false;
+                label.textContent = original;
+                status.textContent = '';
+            });
+        }
+
         document.querySelector('[data-focus-on-load]')?.focus();
     });
 })();

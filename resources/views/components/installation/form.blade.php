@@ -1,8 +1,12 @@
-@props(['action' => null, 'submit', 'pendingNote' => null, 'error' => null])
+@props(['action' => null, 'submit', 'pendingNote' => null, 'error' => null, 'csrfToken' => null, 'busyLabel' => null])
 
 @if ($action)
-    <form class="installer-form" method="post" action="{{ $action }}">
-        @csrf
+    <form class="installer-form" method="post" action="{{ $action }}" @if ($busyLabel) data-busy-label="{{ $busyLabel }}" @endif>
+        @if ($csrfToken)
+            <input type="hidden" name="_token" value="{{ $csrfToken }}">
+        @else
+            @csrf
+        @endif
 @else
     <div class="installer-form">
 @endif
@@ -15,9 +19,12 @@
 
     <div class="installer-form-actions">
         <button class="installer-primary" type="{{ $action ? 'submit' : 'button' }}" @disabled(! $action)>
-            {{ $submit }}
+            <span data-submit-label>{{ $submit }}</span>
             <x-installation.icon name="arrow" />
         </button>
+        @if ($busyLabel)
+            <span class="installer-sr-only" role="status" data-submit-status></span>
+        @endif
         @if (! $action && $pendingNote)
             <p class="installer-hint">{{ $pendingNote }}</p>
         @endif

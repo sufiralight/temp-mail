@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     </head>
     <body class="installer">
+        <div class="installer-loading" data-installer-loading aria-hidden="true" hidden></div>
+        <div class="installer-sr-only" role="status" data-installer-status></div>
         <header class="installer-header">
             <div class="installer-brand">
                 <span class="installer-brand-mark"><x-installation.icon name="mail" /></span>

@@ -35,8 +35,8 @@ class FirstInstallationController extends Controller
         $validator = Validator::make($request->only([
             'database_host', 'database_port', 'database_name', 'database_username', 'database_password',
         ]), [
-            'database_host' => ['required', 'string', 'max:253', 'regex:/\A[A-Za-z0-9.:-]+\z/'],
-            'database_port' => ['required', 'integer', 'between:1,65535'],
+            'database_host' => ['nullable', 'string', 'max:253', 'regex:'.InstallationDatabase::HOST_PATTERN],
+            'database_port' => ['nullable', 'integer', 'between:1,65535'],
             'database_name' => ['required', 'string', 'max:64', 'regex:/\A[^;\x00-\x1f]+\z/u'],
             'database_username' => ['required', 'string', 'max:255'],
             'database_password' => ['nullable', 'string', 'max:1024', 'regex:/\A[^\x00]*\z/u'],
@@ -47,6 +47,8 @@ class FirstInstallationController extends Controller
         }
 
         $settings = $validator->validated();
+        $settings['database_host'] ??= $database->defaultHost();
+        $settings['database_port'] = (int) ($settings['database_port'] ?? $database->defaultPort());
         $settings['database_password'] ??= '';
         try {
             $database->test($settings);

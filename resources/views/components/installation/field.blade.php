@@ -13,7 +13,10 @@
             {{ $attributes->class(['installer-input']) }}
         >
         @if ($type === 'password')
-            <button class="installer-password-toggle" type="button" aria-controls="{{ $name }}" aria-label="Show {{ $passwordLabel }}" data-password-toggle="{{ $passwordLabel }}" hidden>Show</button>
+            <button class="installer-password-toggle" type="button" aria-controls="{{ $name }}" aria-label="Show {{ $passwordLabel }}" title="Show {{ $passwordLabel }}" data-password-toggle="{{ $passwordLabel }}" hidden>
+                <x-installation.icon name="eye" data-password-show />
+                <x-installation.icon name="eye-off" data-password-hide hidden />
+            </button>
             <span class="installer-sr-only" role="status" data-password-status></span>
         @endif
     </div>

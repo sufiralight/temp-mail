@@ -1,5 +1,5 @@
 .installer {
-    --canvas: #fafafa;
+    --canvas: #f4f4f5;
     --surface: #fff;
     --text: #18181b;
     --muted: #52525b;
@@ -27,19 +27,13 @@
     font: 1rem/1.5 Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme]) .installer {
-        color-scheme: dark;
-    }
-}
-
 :root[data-theme='dark'] .installer {
     color-scheme: dark;
 }
 
 @supports (color: light-dark(black, white)) {
     .installer {
-        --canvas: light-dark(#fafafa, #101012);
+        --canvas: light-dark(#f4f4f5, #101012);
         --surface: light-dark(#fff, #18181b);
         --text: light-dark(#18181b, #fafafa);
         --muted: light-dark(#52525b, #b8b8c2);
@@ -65,6 +59,34 @@
 .installer :where(button, input) { font: inherit; }
 .installer :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 .installer-icon { display: block; width: 1.125rem; height: 1.125rem; flex: none; }
+
+.installer-loading {
+    position: fixed;
+    z-index: 10;
+    inset: 0 0 auto;
+    height: 3px;
+    overflow: hidden;
+    background: var(--accent-surface);
+    pointer-events: none;
+}
+
+.installer-loading::before {
+    display: block;
+    width: 42%;
+    height: 100%;
+    background: var(--focus);
+    content: '';
+    animation: installer-loading 1.3s ease-in-out infinite;
+}
+
+@keyframes installer-loading {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(240%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .installer-loading::before { width: 100%; animation: none; }
+}
 
 .installer-header {
     min-height: 4.5rem;
@@ -101,7 +123,7 @@
 }
 
 .installer-theme:hover, .installer-password-toggle:hover { background: var(--subtle); color: var(--text); }
-.installer-main { width: min(100% - 2rem, 34rem); margin: clamp(1.25rem, 6vh, 3.5rem) auto 2.5rem; }
+.installer-main { width: min(100% - 2rem, 34rem); margin: clamp(1rem, 4vh, 2.75rem) auto 2.5rem; }
 .installer-card {
     padding: clamp(1.25rem, 4vw, 2rem);
     border: 1px solid var(--border);
@@ -165,17 +187,18 @@
 }
 
 .installer-input[aria-invalid='true'] { border-color: var(--error); }
-.installer-input-wrap--password .installer-input { padding-right: 4.5rem; }
+.installer-input-wrap--password .installer-input { padding-right: 3.25rem; }
 .installer-password-toggle {
     position: absolute;
-    inset: 1px 1px 1px auto;
-    min-width: 3.75rem;
+    inset: 1px 1px auto auto;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
     border: 0;
     border-radius: .5625rem;
     background: transparent;
     color: var(--muted);
-    font-size: .75rem;
-    font-weight: 600;
     cursor: pointer;
 }
 

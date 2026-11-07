@@ -3,13 +3,18 @@
     description="Enter the connection details from your hosting control panel."
     :step="1"
 >
+    @empty($action)
+        <x-installation.status>
+            Add the installation key in private storage, then refresh this page to enable the connection test.
+        </x-installation.status>
+    @endempty
+
     <x-installation.form
         :action="$action ?? null"
         :error="$formError ?? null"
         :csrf-token="$csrfToken ?? null"
         submit="Test Connection & Continue"
         busy-label="Testing connection…"
-        pending-note="Add an installation key in private storage to enable setup."
     >
         @if ($needsKey ?? false)
             <x-installation.field name="installation_key" label="Installation Key" type="password" password-label="installation key" :error="$fieldErrors['installation_key'] ?? null" autocomplete="off" required />
@@ -18,7 +23,7 @@
 
         <details class="installer-help">
             <summary>Where do I find these details?</summary>
-            <p>Open the database section of your hosting control panel and copy the host, port, database name, and user credentials. On localhost, use the details from your local database setup.</p>
+            <p>Host and port are filled in from the application settings. Use the details from your hosting control panel if they differ, then enter the database name and user credentials.</p>
         </details>
     </x-installation.form>
 </x-installation-layout>

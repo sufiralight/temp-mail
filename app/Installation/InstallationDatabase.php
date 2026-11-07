@@ -13,9 +13,27 @@ use PDO;
 
 class InstallationDatabase
 {
+    public const string HOST_PATTERN = '/\A[A-Za-z0-9.:-]+\z/';
+
     private const string CONNECTION = 'installation';
 
     public function __construct(private readonly InstallationFiles $files) {}
+
+    public function defaultHost(): string
+    {
+        $host = config('database.connections.mysql.host');
+
+        return is_string($host) && strlen($host) <= 253 && preg_match(self::HOST_PATTERN, $host) === 1
+            ? $host
+            : '127.0.0.1';
+    }
+
+    public function defaultPort(): int
+    {
+        return filter_var(config('database.connections.mysql.port'), FILTER_VALIDATE_INT, [
+            'options' => ['min_range' => 1, 'max_range' => 65535],
+        ]) ?: 3306;
+    }
 
     /** @param array<string, mixed> $database */
     public function test(array $database): void

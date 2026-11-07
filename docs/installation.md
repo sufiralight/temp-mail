@@ -26,7 +26,7 @@ Protect setup actions with CSRF protection, rate limiting, and server-side check
 
 ### Operator preparation
 
-- Create a dedicated, empty MySQL or MariaDB database and a user with permissions to read, write, and migrate its schema. The PHP runtime must have `pdo_mysql` enabled. Use the hosting panel's TCP host and port. Environment variables set by the hosting process must allow `.env` to supply the application key and database settings.
+- Create a dedicated, empty MySQL or MariaDB database and a user with permissions to read, write, and migrate its schema. The PHP runtime must have `pdo_mysql` enabled. The installer fills **Database Host** and **Port** from `DB_HOST` and `DB_PORT`, using `127.0.0.1` and `3306` as defaults. Enter the hosting panel's values if they differ. Environment variables set by the hosting process must allow `.env` to supply the application key and database settings.
 - Generate a random 32-byte key and save its 64 hexadecimal characters in `storage/app/private/installation.key` using the hosting file manager. For local development, generate the value with `php -r "echo bin2hex(random_bytes(32)), PHP_EOL;"`. Keep the key private and provide it in the installer before the first connection test. Use HTTPS on a public deployment.
 - Give the PHP process write access to private storage and permission to atomically replace `.env` and clear a cached configuration. The installer preserves existing `.env` settings outside its managed block and disables debug output when activating the new configuration.
 

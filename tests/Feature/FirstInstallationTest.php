@@ -88,8 +88,27 @@ class FirstInstallationTest extends TestCase
         $this->assertFileDoesNotExist($this->directory.'/app/private/installation.state');
     }
 
+    public function test_the_database_host_and_port_are_prefilled_and_used_when_left_blank(): void
+    {
+        config(['database.connections.mysql.host' => 'db.hosting.test', 'database.connections.mysql.port' => '3312']);
+        $token = $this->openForm('/install');
+        $this->get('/install')->assertSee('value="db.hosting.test"', false)->assertSee('value="3312"', false);
+        $target = null;
+        DB::extend('installation', function (array $settings, string $name) use (&$target): SQLiteConnection {
+            $target = [$settings['host'], $settings['port']];
+
+            return new SQLiteConnection(new PDO('sqlite::memory:'), ':memory:', '', ['name' => $name, 'driver' => 'sqlite']);
+        });
+
+        $this->post('/install/database', ['_token' => $token, 'installation_key' => self::KEY, 'database_host' => '', 'database_port' => ''] + $this->databaseFields())
+            ->assertRedirect('/install/admin');
+
+        $this->assertSame(['db.hosting.test', 3312], $target);
+    }
+
     public function test_the_first_installation_creates_one_admin_and_locks_setup(): void
     {
+        config(['database.connections.mysql.host' => 'db.hosting.test', 'database.connections.mysql.port' => '3312']);
         $this->useDisposableDatabase();
         File::put($this->directory.'/.env', "# Preserve operator settings\nAPP_NAME=Workspace\nDB_CONNECTION=sqlite\n");
         $token = $this->authorizeAndTestDatabase();
@@ -100,6 +119,8 @@ class FirstInstallationTest extends TestCase
         $environment = File::get($this->directory.'/.env');
         $this->assertStringContainsString('# Preserve operator settings', $environment);
         $this->assertSame('mysql', Dotenv::parse($environment)['DB_CONNECTION']);
+        $this->assertSame('localhost', Dotenv::parse($environment)['DB_HOST']);
+        $this->assertSame('3306', Dotenv::parse($environment)['DB_PORT']);
         $this->assertSame($this->databaseFields()['database_password'], Dotenv::parse($environment)['DB_PASSWORD']);
         $this->assertStringStartsWith('complete ', File::get($this->directory.'/app/private/installation.state'));
         $this->assertFirstAdministrator();

@@ -57,6 +57,8 @@ class InstallationAccessTest extends TestCase
             ->assertSee('Database Host')
             ->assertSee('for="database_port"', false)
             ->assertSee('aria-controls="database_password"', false)
+            ->assertSee('data-password-show', false)
+            ->assertSee('data-password-hide', false)
             ->assertSee('Test Connection & Continue')
             ->assertDontSee('<form', false);
     }

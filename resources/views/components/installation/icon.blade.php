@@ -19,5 +19,12 @@
         @case('check')
             <path d="m5 12 4 4L19 6" />
             @break
+        @case('eye')
+            <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
+            <circle cx="12" cy="12" r="2.5" />
+            @break
+        @case('eye-off')
+            <path d="m3 3 18 18M10 6.2a11.2 11.2 0 0 1 2-.2c6.5 0 10 6 10 6a14.1 14.1 0 0 1-3.2 3.5M6 7.8A14.6 14.6 0 0 0 2 12s3.5 6 10 6a11 11 0 0 0 4.1-.8" />
+            @break
     @endswitch
 </svg>

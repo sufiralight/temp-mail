@@ -50,6 +50,32 @@ class InstallationAccessTest extends TestCase
         $this->get('/install')->assertOk()->assertSee('Connect your database');
     }
 
+    public function test_the_database_screen_renders_fields_without_a_submission_form(): void
+    {
+        $this->get('/install')
+            ->assertOk()
+            ->assertSee('Database Host')
+            ->assertSee('for="database_port"', false)
+            ->assertSee('aria-controls="database_password"', false)
+            ->assertSee('Test Connection & Continue')
+            ->assertDontSee('<form', false);
+    }
+
+    public function test_the_admin_view_exposes_the_current_step_and_password_error(): void
+    {
+        $this->view('install.admin', [
+            'fieldErrors' => ['password' => 'Enter a stronger password.'],
+            'formError' => 'Review the highlighted fields.',
+        ])
+            ->assertSee('Step 2 of 2')
+            ->assertSee('Database connected')
+            ->assertSee('data-focus-on-load', false)
+            ->assertSee('aria-describedby="password-hint password-error"', false)
+            ->assertSee('aria-invalid="true"', false)
+            ->assertSee('role="alert"', false)
+            ->assertSee('Enter a stronger password.');
+    }
+
     public function test_an_installed_deployment_redirects_the_installer_to_login(): void
     {
         File::put($this->directory.'/.env', 'APP_NAME=Temp Mail');
@@ -73,7 +99,12 @@ class InstallationAccessTest extends TestCase
         $this->app->instance('config_loaded_from_cache', true);
 
         $this->get('/')->assertRedirect('/install');
-        $this->get('/install')->assertOk()->assertSee('Restore configuration')->assertDontSee('Connect your database');
+        $this->get('/install')
+            ->assertOk()
+            ->assertSee('Restore configuration')
+            ->assertSee('Operator verification is required')
+            ->assertDontSee('Connect your database')
+            ->assertDontSee('name="database_password"', false);
     }
 
     public function test_an_invalid_marker_requires_operator_intervention(): void

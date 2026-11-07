@@ -1,0 +1,232 @@
+.installer {
+    --canvas: #fafafa;
+    --surface: #fff;
+    --text: #18181b;
+    --muted: #52525b;
+    --border: #e4e4e7;
+    --control-border: #888893;
+    --subtle: #f4f4f5;
+    --accent: #5b21b6;
+    --accent-surface: #f5f0ff;
+    --accent-border: #ddd1fa;
+    --focus: #7c3aed;
+    --button: #18181b;
+    --button-hover: #3f3f46;
+    --button-text: #fff;
+    --success: #166534;
+    --success-surface: #f0fdf4;
+    --error: #b91c1c;
+    --error-surface: #fef2f2;
+    --shadow: 0 16px 44px rgb(24 24 27 / 5%), 0 2px 5px rgb(24 24 27 / 4%);
+
+    color-scheme: light;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--canvas);
+    color: var(--text);
+    font: 1rem/1.5 Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .installer {
+        color-scheme: dark;
+    }
+}
+
+:root[data-theme='dark'] .installer {
+    color-scheme: dark;
+}
+
+@supports (color: light-dark(black, white)) {
+    .installer {
+        --canvas: light-dark(#fafafa, #101012);
+        --surface: light-dark(#fff, #18181b);
+        --text: light-dark(#18181b, #fafafa);
+        --muted: light-dark(#52525b, #b8b8c2);
+        --border: light-dark(#e4e4e7, #33333a);
+        --control-border: light-dark(#888893, #71717a);
+        --subtle: light-dark(#f4f4f5, #27272a);
+        --accent: light-dark(#5b21b6, #ddd0ff);
+        --accent-surface: light-dark(#f5f0ff, #2b2040);
+        --accent-border: light-dark(#ddd1fa, #523b72);
+        --focus: light-dark(#7c3aed, #b99aff);
+        --button: light-dark(#18181b, #fafafa);
+        --button-hover: light-dark(#3f3f46, #e4e4e7);
+        --button-text: light-dark(#fff, #18181b);
+        --success: light-dark(#166534, #a7efbb);
+        --success-surface: light-dark(#f0fdf4, #173021);
+        --error: light-dark(#b91c1c, #ffb4b4);
+        --error-surface: light-dark(#fef2f2, #3d2125);
+    }
+}
+
+.installer *, .installer *::before, .installer *::after { box-sizing: border-box; }
+.installer [hidden] { display: none; }
+.installer :where(button, input) { font: inherit; }
+.installer :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.installer-icon { display: block; width: 1.125rem; height: 1.125rem; flex: none; }
+
+.installer-header {
+    min-height: 4.5rem;
+    padding: .75rem clamp(1rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.installer-brand { display: flex; align-items: center; gap: .65rem; font-weight: 700; letter-spacing: -.025em; }
+.installer-brand-mark {
+    display: grid;
+    place-items: center;
+    width: 2.125rem;
+    height: 2.125rem;
+    border: 1px solid var(--accent-border);
+    border-radius: .65rem;
+    background: var(--accent-surface);
+    color: var(--accent);
+}
+
+.installer-theme {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: .625rem;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.installer-theme:hover, .installer-password-toggle:hover { background: var(--subtle); color: var(--text); }
+.installer-main { width: min(100% - 2rem, 34rem); margin: clamp(1.25rem, 6vh, 3.5rem) auto 2.5rem; }
+.installer-card {
+    padding: clamp(1.25rem, 4vw, 2rem);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.installer-eyebrow {
+    margin: 0 0 .625rem;
+    color: var(--muted);
+    font-size: .6875rem;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+}
+
+.installer-steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+}
+
+.installer-steps li {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    min-height: 2.5rem;
+    padding: .375rem .625rem;
+    border: 1px solid var(--border);
+    border-radius: .625rem;
+    color: var(--muted);
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+.installer-steps [aria-current='step'] { background: var(--accent-surface); border-color: var(--accent-border); color: var(--accent); }
+.installer-step-number { display: grid; place-items: center; width: 1.375rem; flex: none; font-variant-numeric: tabular-nums; }
+.installer-step-number .installer-icon { width: 1rem; height: 1rem; }
+
+.installer-intro { margin: 0 0 1.5rem; }
+.installer-intro h1 { margin: 0; font-size: clamp(1.5rem, 5vw, 2rem); line-height: 1.15; letter-spacing: -.045em; }
+.installer-intro p { margin: .5rem 0 0; color: var(--muted); font-size: .875rem; }
+.installer-form { display: grid; gap: .875rem; }
+.installer-database-address { display: grid; grid-template-columns: minmax(0, 1fr); gap: .875rem; }
+.installer-field { display: grid; align-content: start; gap: .3125rem; min-width: 0; }
+.installer-field label { font-size: .8125rem; font-weight: 600; }
+.installer-input-wrap { position: relative; }
+.installer-input {
+    display: block;
+    width: 100%;
+    min-height: 2.875rem;
+    padding: .625rem .75rem;
+    border: 1px solid var(--control-border);
+    border-radius: .625rem;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.installer-input[aria-invalid='true'] { border-color: var(--error); }
+.installer-input-wrap--password .installer-input { padding-right: 4.5rem; }
+.installer-password-toggle {
+    position: absolute;
+    inset: 1px 1px 1px auto;
+    min-width: 3.75rem;
+    border: 0;
+    border-radius: .5625rem;
+    background: transparent;
+    color: var(--muted);
+    font-size: .75rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.installer-hint, .installer-error { margin: 0; font-size: .75rem; color: var(--muted); }
+.installer-error { color: var(--error); }
+.installer-help { font-size: .8125rem; color: var(--muted); }
+.installer-help summary { width: fit-content; padding: .6875rem 0; font-weight: 600; cursor: pointer; }
+.installer-help p { margin: .125rem 0 .25rem; }
+.installer-form-actions { display: grid; gap: .5rem; }
+.installer-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .625rem;
+    min-height: 2.875rem;
+    padding: .625rem 1rem;
+    border: 1px solid transparent;
+    border-radius: .625rem;
+    background: var(--button);
+    color: var(--button-text);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.installer-primary:hover:not(:disabled) { background: var(--button-hover); }
+.installer-primary:disabled { background: var(--subtle); border-color: var(--border); color: var(--muted); cursor: not-allowed; }
+.installer-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: .75rem;
+    border: 1px solid var(--border);
+    border-radius: .625rem;
+    background: var(--subtle);
+    color: var(--muted);
+    font-size: .8125rem;
+}
+
+.installer-intro + .installer-status { margin-bottom: 1rem; }
+.installer-status span { display: flex; align-items: center; gap: .375rem; }
+.installer-status a { color: inherit; font-weight: 600; }
+.installer-status--success { background: var(--success-surface); color: var(--success); }
+.installer-status--error { background: var(--error-surface); color: var(--error); }
+.installer-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (max-width: 24rem) {
+    .installer-steps li { gap: .375rem; padding-inline: .375rem; font-size: .6875rem; }
+    .installer-step-number { width: 1rem; }
+}
+
+@media (min-width: 36rem) {
+    .installer-database-address { grid-template-columns: minmax(0, 1fr) 6.5rem; }
+}

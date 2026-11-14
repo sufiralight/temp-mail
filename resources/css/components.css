@@ -1,0 +1,138 @@
+@layer components {
+    .ui-button, .ui-control {
+        @apply rounded-md text-small;
+        min-block-size: var(--ui-height, 2.75rem);
+        padding-inline: var(--ui-padding, .875rem);
+    }
+
+    .ui-button {
+        @apply inline-flex items-center justify-center gap-2 border font-semibold;
+        border-color: var(--control-boundary);
+        background: var(--surface);
+    }
+
+    .ui-button[data-size='sm'], .ui-control[data-size='sm'] {
+        --ui-height: 2.25rem;
+        --ui-padding: .625rem;
+    }
+
+    .ui-button[data-size='lg'], .ui-control[data-size='lg'] {
+        --ui-height: 3rem;
+        --ui-padding: 1rem;
+    }
+
+    .ui-button[data-icon-only] {
+        min-inline-size: var(--ui-height, 2.75rem);
+        padding-inline: 0;
+    }
+
+    .ui-button[data-variant='primary'] {
+        @apply border-primary bg-primary text-primary-foreground;
+    }
+
+    .ui-button[data-variant='ghost'] {
+        @apply border-transparent bg-transparent;
+    }
+
+    .ui-button[data-variant='danger'] {
+        border-color: var(--danger-foreground);
+        color: var(--danger-foreground);
+    }
+
+    .ui-button:enabled:hover {
+        box-shadow: inset 0 0 0 1px currentColor;
+    }
+
+    .ui-button:enabled:active {
+        box-shadow: inset 0 0 0 2px currentColor;
+    }
+
+    .ui-button:disabled, .ui-control:disabled, .ui-choice-input:disabled {
+        @apply cursor-not-allowed opacity-60;
+    }
+
+    .ui-icon, .ui-spinner-status {
+        @apply inline-flex shrink-0 align-middle;
+    }
+
+    .ui-field {
+        @apply grid min-w-0 gap-2;
+    }
+
+    .ui-control {
+        @apply w-full min-w-0 border bg-surface text-foreground;
+        border-color: var(--control-boundary);
+    }
+
+    .ui-control::placeholder {
+        color: var(--foreground-muted);
+        opacity: 1;
+    }
+
+    .ui-control:read-only:is(input, textarea) {
+        @apply bg-surface-muted;
+    }
+
+    textarea.ui-control {
+        @apply resize-y py-2;
+    }
+
+    .ui-choice {
+        @apply flex min-h-8 items-center gap-3 text-small;
+    }
+
+    .ui-choice-input {
+        @apply size-5 shrink-0;
+        accent-color: var(--primary);
+    }
+
+    .ui-control[aria-invalid='true'], .ui-choice-input[aria-invalid='true'] {
+        outline: 2px solid var(--danger-foreground);
+        outline-offset: -2px;
+    }
+
+    .ui-control[aria-invalid='true']:focus-visible,
+    .ui-choice-input[aria-invalid='true']:focus-visible {
+        outline-color: var(--focus-ring);
+        outline-offset: 3px;
+    }
+
+    .ui-password {
+        @apply flex items-center gap-2;
+    }
+
+    .ui-card {
+        @apply grid min-w-0 gap-4 rounded-xl border border-border p-5 sm:p-6;
+    }
+
+    .ui-alert {
+        @apply flex items-start gap-3 rounded-lg border border-border bg-surface-muted p-4;
+    }
+
+    .ui-badge {
+        @apply inline-flex items-center gap-2 rounded-full border border-border bg-surface-muted px-2.5 py-0.5 text-small;
+    }
+
+    .ui-spinner {
+        @apply size-5 rounded-full border-2 border-current border-e-transparent;
+    }
+
+    .ui-spinner[data-size='sm'] { @apply size-4; }
+    .ui-spinner[data-size='lg'] { @apply size-6; }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .ui-spinner { animation: ui-spin .8s linear infinite; }
+    }
+
+    @keyframes ui-spin {
+        to { transform: rotate(1turn); }
+    }
+
+    .ui-modal {
+        @apply fixed inset-0 m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg overflow-auto rounded-xl border border-border bg-surface p-6 text-foreground;
+    }
+
+    .ui-modal::backdrop {
+        background: color-mix(in srgb, var(--modal-scrim) 65%, transparent);
+    }
+}

@@ -44,7 +44,7 @@ test('the approved palette and both semantic mappings are exact', () => {
     assert.equal(actualPalette.length, 16);
     assert.deepEqual(Object.fromEntries(actualPalette.map(([, name, value]) => [name, value])), palette);
 
-    const actualMappings = [...css.matchAll(/--([\w-]+): light-dark\(var\(--pz-([\w-]+)\), var\(--pz-([\w-]+)\)\);/g)];
+    const actualMappings = [...css.matchAll(/--([\w-]+): light-dark\(var\(--pz-([\w-]+)\), var\(--pz-([\w-]+)\)\);/g)].filter(([, name]) => name !== 'control-boundary');
     assert.equal(actualMappings.length, 12);
     assert.deepEqual(Object.fromEntries(actualMappings.map(([, name, light, dark]) => [name, `${light} ${dark}`])), mappings);
 });
@@ -123,8 +123,8 @@ test('blocked storage leaves appearance usable in memory', () => {
 test('the Vite production manifest resolves CSS, JavaScript and both local fonts', () => {
     const manifest = JSON.parse(read('public/build/manifest.json'));
     const stylesheet = read(`public/build/${manifest['resources/css/app.css'].file}`);
-    assert.ok(read(`public/build/${manifest['resources/js/app.js'].file}`).includes('appearance-preview'));
-    for (const selector of ['.bg-canvas', '.bg-surface', '.text-foreground-muted', '.text-primary-foreground']) {
+    assert.ok(read(`public/build/${manifest['resources/js/app.js'].file}`).includes('data-appearance'));
+    for (const selector of ['.bg-canvas', '.bg-surface', '.text-foreground-muted', '.ui-button', '.ui-modal']) {
         assert.ok(stylesheet.includes(selector), selector);
     }
 

@@ -1,6 +1,6 @@
 # Design system
 
-[Pure Zinc 16 v1.0](color-system.md) supplies the semantic palette. Phase 1.1 implements typography and appearance. Spacing, corner radius, elevation, icons, and reusable component states remain for later work.
+[Pure Zinc 16 v1.0](color-system.md) supplies the semantic palette. The shared UI library uses semantic tokens and centralized component styles in resources/css/components.css. See the [component APIs](components.md).
 
 ## Typography
 

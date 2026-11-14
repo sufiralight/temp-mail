@@ -1,7 +1,15 @@
 # Design system
 
-Pure Zinc 16 v1.0 supplies the [semantic color tokens](color-system.md). Phase 1 should define spacing, corner radius, and elevation scales centrally alongside typography and motion. Prefer balanced spacing, subtle borders, restrained shadows, clean hierarchy, and responsive layouts. Define default, hover, focus-visible, selected, disabled, loading, and invalid states at the component level. Keep color and motion purposeful and avoid decorative gradients.
+[Pure Zinc 16 v1.0](color-system.md) supplies the semantic palette. Phase 1.1 implements typography and appearance. Spacing, corner radius, elevation, icons, and reusable component states remain for later work.
 
-Inter is the primary UI font and JetBrains Mono is the monospace font. Self-host future WOFF2 assets with license notices and provide fallback stacks with appropriate script coverage. Support translated labels, text expansion, document language and direction, CSS logical properties, and selective mirroring of directional icons. Use a controlled Lucide SVG catalog and keep decorative icons hidden from assistive technology.
+## Typography
 
-Maintain one canonical Light, Dark, or System preference. Resolve it early to avoid a flash of the wrong theme. System follows OS changes while active. Provide a labeled keyboard-accessible selector, fall back to System if preference storage is unavailable, and respect reduced motion. Theme persistence and initialization details belong to Phase 1.
+Tailwind provides `font-sans` for Inter and `font-mono` for JetBrains Mono with system fallbacks. Use `text-body`, `text-small`, `text-label`, `text-heading`, and `text-technical` for size, line height and tracking. Pair technical text with `font-mono`. Labels and headings set their own weight.
+
+The bundled upright variable WOFF2 files come from Fontsource 5.3.0 with SIL Open Font License notices in `public/licenses/`. They use `font-display: swap`. The Latin subsets cover basic Latin with selected additional characters and symbols. Other scripts, including Arabic and Hebrew, and missing Latin Extended characters use system fallback. Review script coverage, translated text expansion, document language and direction, logical properties, and directional icon mirroring before adding locales.
+
+## Appearance
+
+Blade inlines the trusted local `resources/js/appearance.js` in the head before Vite styles. Keep this file in the deployed application source. It reads `temp-mail.appearance` from localStorage and sets `html[data-theme]` to the resolved `light` or `dark` value. The storage values are `light`, `dark`, and `system`. Missing, invalid, or inaccessible preferences use System. Storage exceptions leave new choices usable in memory. Preferences are per browser origin.
+
+Use `window.appearance.getPreference()` to read the selected mode and `window.appearance.setPreference(value)` to apply and persist it. System reacts to OS changes. CSS uses the OS preference when JavaScript is unavailable. The welcome preview uses a native select and changes appearance without moving focus or animating the palette.

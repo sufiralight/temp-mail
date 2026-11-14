@@ -2,18 +2,18 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_the_welcome_page_includes_the_appearance_engine_and_preview(): void
     {
-        $response = $this->get('/');
+        $this->withoutVite();
 
-        $response->assertStatus(200);
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Temp Mail SaaS')
+            ->assertSee('temp-mail.appearance')
+            ->assertSee('id="appearance-preview"', false);
     }
 }

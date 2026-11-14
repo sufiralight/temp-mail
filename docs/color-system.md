@@ -37,3 +37,5 @@ Owner approved on 2026-11-14. New official primitives require owner approval.
 | focus-ring | Zinc 700 | Zinc 300 |
 
 Reusable components must consume semantic tokens instead of hardcoded Zinc, Slate, Gray, black, white, or arbitrary color utilities. Reserve status primitives for meaningful states. Verify foreground and muted text on canvas, surfaces, hover and selected backgrounds, primary foreground on primary, focus rings against adjacent colors, and essential boundaries against surrounding surfaces in both themes. Verify each status color in its intended role and pair it with accessible text or symbols. See [accessibility](accessibility.md).
+
+In code, `resources/css/app.css` defines primitive values once as `--pz-*`. Semantic custom properties use `light-dark()` with the approved pairs. The root `color-scheme` follows the OS by default and `html[data-theme]` applies the resolved scheme. Tailwind 4 `@theme inline` aliases these properties as `--color-*`, enabling utilities such as `bg-canvas` and `text-foreground-muted`. Status utilities reference the corresponding primitives directly.

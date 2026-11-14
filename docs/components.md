@@ -16,3 +16,5 @@ These interfaces are proposals for Phase 1. Use anonymous Blade components by de
 | Appearance control | Current preference and labeled Light, Dark, and System choices. |
 
 See [accessibility](accessibility.md) and [design system](design-system.md).
+
+Future appearance controls should use the shared `window.appearance` API documented in the [design system](design-system.md). The welcome page currently provides a verification control.

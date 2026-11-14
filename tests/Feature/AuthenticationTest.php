@@ -147,4 +147,35 @@ class AuthenticationTest extends TestCase
             ->assertSessionHas('status', 'Verification email is unavailable right now. Try resending later.');
         $this->assertAuthenticated();
     }
+
+    public function test_shell_routes_enforce_roles_and_verification(): void
+    {
+        $this->get('/admin')->assertRedirect('/login');
+        $user = User::factory()->create();
+        $this->actingAs($user)->get('/account')->assertOk()->assertDontSee('/admin', false);
+        $this->get('/admin')->assertForbidden();
+        $this->get('/admin/system')->assertForbidden();
+        $this->actingAs(User::factory()->unverified()->create())->get('/account/settings')->assertRedirect('/email/verify');
+        $admin = User::factory()->unverified()->create(['is_super_admin' => true]);
+        $this->actingAs($admin)->get('/admin')->assertOk()->assertSee('Current administrator');
+        $this->get('/admin/system')->assertOk()->assertSee('Runtime information')->assertDontSee(config('app.key'));
+        $this->assertSame('complete-v1', File::get($this->path.'/state'));
+    }
+
+    public function test_settings_preserve_role_and_require_password_for_email_changes(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user)->get('/account/settings')->assertOk()->assertSee('Save Changes');
+        $this->app->detectEnvironment(fn () => 'local');
+        $this->patch('/account/settings', ['name' => 'Blocked', 'email' => $user->email])->assertStatus(419);
+        $this->app->detectEnvironment(fn () => 'testing');
+
+        $target = ['name' => 'Updated Name', 'email' => 'NEW@EXAMPLE.TEST', 'is_super_admin' => true];
+        $this->patch('/account/settings', $target)->assertSessionHasErrors('current_password');
+        $this->assertSame($user->email, $user->fresh()->email);
+        $this->patch('/account/settings', $target + ['current_password' => 'password'])->assertRedirect('/email/verify');
+        $this->assertSame('new@example.test', $user->fresh()->email);
+        $this->assertFalse($user->fresh()->hasVerifiedEmail());
+        $this->assertFalse($user->fresh()->is_super_admin);
+    }
 }

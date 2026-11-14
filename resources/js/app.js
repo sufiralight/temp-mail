@@ -1,6 +1,8 @@
+import { initializeShell } from './shell';
 import { initializeComponents } from './components';
 
 initializeComponents();
+initializeShell();
 
 for (const preview of document.querySelectorAll('[data-appearance]')) {
     if (!window.appearance) break;

@@ -72,3 +72,9 @@ Use a small container and a vertical stack for narrow forms, a default container
     </x-ui.section>
 </x-ui.container>
 ```
+
+## Application shell
+
+The shared app-shell component accepts title, description, context and breadcrumbs. Navigation is defined in config/navigation.php and rendered by one component for the sidebar and native mobile dialog. Breadcrumb keys are visible labels and values are named routes, with null for the current page. The account disclosure contains native links and a POST logout form. Appearance buttons share the existing appearance API and announce selection with aria-pressed.
+
+Customer navigation currently contains Overview and Account Settings. Future mailbox and domain links belong in customer navigation when their routes exist. Future administration groups include Mail Infrastructure, Content Management, Localization, Users & Access, Subscriptions & Payments, Appearance, and Security & Operations. Publish links only when the corresponding authorized routes exist.

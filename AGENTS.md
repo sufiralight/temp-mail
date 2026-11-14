@@ -6,7 +6,7 @@ Before changing code, inspect the relevant [agent guides](agents/) and [project 
 - Validate input server-side, enforce Laravel policies, escape output, and keep credentials and private configuration out of Git and the public document root. Run migrations only in explicitly authorized environments.
 - Use consistent [Blade APIs](docs/components.md) and [semantic tokens](docs/color-system.md). Target [WCAG 2.2 AA](docs/accessibility.md) and verify keyboard, responsive and theme behavior for UI changes.
 - Treat Windows loopback development and conventional Linux cPanel hosting as equal targets. Follow the [deployment requirements and readiness checklist](docs/deployment.md) for every affected change. Flag any target-specific limitations before merging.
-- Respect the [phase roadmap](docs/implementation-plan.md). Phase 1.3 provides shared Blade controls and responsive layout primitives. Reuse the documented x-ui APIs before adding new controls. Phase 2 adds the [operator-authorized installer](docs/installation-flow.md). Phase 3 adds authentication using the web guard. Further phase work requires explicit owner approval.
+- Respect the [phase roadmap](docs/implementation-plan.md). Phase 1.3 provides shared Blade controls and responsive layout primitives. Reuse the documented x-ui APIs before adding new controls. Phase 2 adds the [operator-authorized installer](docs/installation-flow.md). Phase 3 adds authentication using the web guard. Phase 4 adds the customer and Super Admin shell. Further phase work requires explicit owner approval.
 - Review status and diffs, stage only intended files, check exclusions and run git diff --check. Use normal commits and pushes. Never force-push or rewrite history.
 
 ## Definition of done

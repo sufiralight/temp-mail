@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AccountSettingsController;
 use App\Http\Controllers\AuthenticationController as Auth;
 use App\Http\Middleware\AuthenticationAvailable;
+use App\Http\Middleware\VerifiedAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,12 +30,16 @@ Route::middleware(AuthenticationAvailable::class)->group(function () {
             ->middleware(['signed', 'throttle:6,1,verify:'])->name('verification.verify');
         Route::post('/email/verification-notification', [Auth::class, 'resend'])
             ->middleware('throttle:3,1,resend:')->name('verification.send');
-        Route::get('/account', function (Request $request) {
-            if (! $request->user()->hasVerifiedEmail() && ! $request->user()->can('super-admin')) {
-                return redirect()->route('verification.notice');
-            }
+        Route::middleware(VerifiedAccount::class)->group(function () {
+            Route::view('/account', 'account.overview')->name('account');
+            Route::view('/account/settings', 'account.settings')->name('account.settings');
+            Route::patch('/account/settings', [AccountSettingsController::class, 'update'])
+                ->middleware('throttle:8,1,account-settings:')->name('account.settings.update');
+        });
 
-            return view('auth.account');
-        })->name('account');
+        Route::prefix('admin')->name('admin.')->middleware('can:super-admin')->group(function () {
+            Route::view('/', 'admin.overview')->name('overview');
+            Route::view('/system', 'admin.system')->name('system');
+        });
     });
 });

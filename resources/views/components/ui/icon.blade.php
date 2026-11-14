@@ -1,6 +1,6 @@
 @props(['name', 'size' => 20, 'label' => null])
 @php
-    $catalog = ['arrow-right', 'check', 'circle-alert', 'circle-check', 'eye', 'eye-off', 'info', 'plus', 'search', 'trash-2', 'triangle-alert', 'x'];
+    $catalog = ['arrow-right', 'check', 'circle-alert', 'circle-check', 'eye', 'eye-off', 'info', 'plus', 'search', 'trash-2', 'triangle-alert', 'x', 'menu', 'sun', 'moon', 'monitor', 'user', 'settings', 'layout-dashboard'];
     if (! in_array($name, $catalog, true) || ! in_array((string) $size, ['16', '20', '24'], true)) {
         throw new InvalidArgumentException('Unknown UI icon or unsupported icon size.');
     }

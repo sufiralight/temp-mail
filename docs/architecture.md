@@ -13,3 +13,7 @@ The installer uses dedicated temporary database connections and separate private
 ## Authentication
 
 The installed application uses Laravel’s web session guard, users password broker, and signed email verification. The completion marker and private environment configuration gate all auth routes. Public registration accepts only name, email and password. The super-admin gate reads the existing is_super_admin flag. The protected account page requires verified email for ordinary users and permits the operator-provisioned Super Admin immediately. Browser login redirects to the named account route. Logout is a CSRF-protected POST.
+
+## Application routes
+
+Customer pages use the installation gate, authenticated sessions and the existing verified-email policy, including the provisioned Super Admin exception. Admin pages additionally require the super-admin gate. Account settings can change only name and email. Email changes require the current password, invalidate prior verification and reset tokens, rotate the remember token, and lead to the existing verification resend workflow.

@@ -15,3 +15,5 @@ The control-boundary role uses Zinc 600 in Light and Zinc 400 in Dark. It provid
 The preview uses native labeled controls, 36–48px button sizes, a shared visible focus outline, and a native modal with focus restoration. Loading spinners animate only when motion is permitted. Before adding new controls, verify keyboard and screen-reader operation, focus restoration, and text and boundary contrast on the actual surrounding surface.
 
 At 320px, 375px, 768px, 1024px and 1440px, headless Edge checks verified Light and Dark reflow, bounds of interactive controls, modal sizing, and Escape focus restoration. System appearance, reduced-motion skeletons and keyboard focus styling were also checked. Screen-reader and manual zoom review remain separate verification steps.
+
+Installer steps use native form controls, shared field error associations and an inline loading indicator for installation. Verify keyboard operation, responsive reflow and server validation feedback on the deployed host.

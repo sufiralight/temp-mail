@@ -31,3 +31,5 @@ Use Laravel's local disk for private files. File-backed sessions and cache are v
 Shared-hosting deployment remains unverified until these checks run on the target server.
 
 The component preview is guarded at request time and returns 404 outside Laravel local mode or for a non-loopback socket peer. Deploy the Lucide notice in public/licenses with the font notices. Component interactions are included in the existing compiled JavaScript entry.
+
+Before enabling the installer, verify that the cPanel host can pass an authenticated REMOTE_USER over HTTPS and that private filesystem locking and atomic replacement work. Follow the [installation and recovery runbook](installation-flow.md). Keep the private installation marker in persistent storage across deployments.

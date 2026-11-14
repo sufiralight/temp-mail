@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\InstallationController;
+use App\Installation\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -12,3 +14,16 @@ Route::get('/_dev/components', function (Request $request) {
 
     return view('dev.components');
 })->name('dev.components');
+
+Route::prefix('install')->name('installation.')->controller(InstallationController::class)->group(function () {
+    Route::get('/', 'show')->name('show');
+    Route::post('/test', 'testConnection')->middleware('throttle:6,1,install-test:')->name('test');
+    Route::post('/next', 'next')->middleware('throttle:12,1,install-next:')->name('next');
+    Route::post('/commit', 'install')->middleware('throttle:3,1,install-commit:')->name('commit');
+});
+
+Route::get('/login', function (State $state) {
+    abort_unless($state->status() === 'complete' && is_file(app()->environmentFilePath()), 404);
+
+    return response()->view('installation.login', status: 503, headers: ['Cache-Control' => 'no-store']);
+})->name('login');

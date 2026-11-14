@@ -5,7 +5,7 @@ Before changing code, inspect the relevant [agent guides](agents/) and [project 
 - Use Laravel 13, PHP 8.5, Composer 2, MySQL or MariaDB, Blade Components, Tailwind CSS 4, Vite 8, and vanilla JavaScript. Keep the conventional Laravel structure and avoid unnecessary dependencies.
 - Validate input server-side, enforce Laravel policies, escape output, and keep credentials and private configuration out of Git and the public document root. Run migrations only in explicitly authorized environments.
 - Use consistent [Blade APIs](docs/components.md) and [semantic tokens](docs/color-system.md). Target [WCAG 2.2 AA](docs/accessibility.md) and verify keyboard, responsive and theme behavior for UI changes.
-- Preserve [shared hosting compatibility](docs/deployment.md). Build assets locally or in CI and keep Node.js, Redis, Docker, Supervisor and permanent queue workers out of runtime requirements.
+- Treat Windows loopback development and conventional Linux cPanel hosting as equal targets. Follow the [deployment requirements and readiness checklist](docs/deployment.md) for every affected change. Flag any target-specific limitations before merging.
 - Respect the [phase roadmap](docs/implementation-plan.md). Phase 0 adopts the scaffold and establishes standards. Phase 1 requires explicit owner approval.
 - Review status and diffs, stage only intended files, check exclusions and run git diff --check. Use normal commits and pushes. Never force-push or rewrite history.
 

@@ -41,3 +41,34 @@ A loading button renders disabled with `aria-busy` and preserves its label. For 
 The Lucide 0.468.0 catalog is explicitly allowlisted and includes arrow-right, check, circle-alert, circle-check, eye, eye-off, info, plus, search, trash-2, triangle-alert and x. Icons render from local Blade partials with currentColor, and unknown names and sizes raise an exception. [Lucide license](https://github.com/lucide-icons/lucide/blob/0.468.0/LICENSE)
 
 The local verification page is at `/_dev/components`. It requires Laravel's local environment and a loopback socket peer. Use the page to exercise both themes, validation, native form controls and dialog behavior. See [accessibility](accessibility.md).
+
+## Layout primitives
+
+| Component | API |
+|---|---|
+| Container | size sm, md, lg (default), xl or full. Centers content with responsive inline gutters. |
+| Stack | direction vertical (default), horizontal or responsive. Gap none, sm, md, lg or xl. Align stretch, start, center or end. Justify start, center, end or between. Optional wrap for rows. |
+| Grid | columns 1–4, default 2. Same gap and align options as stack. Starts at one column, uses two from md and reaches three or four from lg when requested. |
+| Section | spacing none, sm, md or lg. Optional heading and description slots. Supply a heading at the appropriate level and reference its ID with aria-labelledby where a named region helps. |
+| Page header | title, optional description, breadcrumbs and actions slots. Renders the page h1. Supply a labeled navigation element in the breadcrumbs slot. |
+| Divider | orientation horizontal or vertical. Optional decorative flag hides the separator from assistive technology. |
+| Empty state | title, optional description and allowlisted icon, heading-level 2–4, and primary and secondary action slots. |
+| Skeleton | shape text, rectangle or circle. Size sm, md or lg. Text uses heights 0.75/1/1.25rem, rectangles 3/5/8rem, circles 2/3/4rem. Use classes to match the final content footprint. Decorative by default. |
+| Sr-only | A span applying Tailwind's sr-only utility to its content. |
+| Surface | Generic bordered surface with optional muted treatment. The caller sets padding. Use card for built-in padding and structured header and footer slots. |
+
+Use a small container and a vertical stack for narrow forms, a default container and sections for standard pages, and xl or full for wide data pages. Pair a grid with cards for columns. Use an empty state inside a surface for centered feedback. For loading, mark the content region busy and provide a textual status alongside decorative skeletons. Wrap horizontal action groups or use a responsive stack.
+
+```blade
+<x-ui.container size="lg">
+    <x-ui.page-header title="Records">
+        <x-slot:actions><x-ui.button>Add record</x-ui.button></x-slot:actions>
+    </x-ui.page-header>
+    <x-ui.section>
+        <x-ui.grid columns="2">
+            <x-ui.card>Recent records</x-ui.card>
+            <x-ui.surface class="p-5"><x-ui.empty-state title="No saved records" /></x-ui.surface>
+        </x-ui.grid>
+    </x-ui.section>
+</x-ui.container>
+```

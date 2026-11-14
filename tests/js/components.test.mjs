@@ -63,6 +63,12 @@ test('dialog uses showModal and restores focus on native close', () => {
 
 test('the spinner opts into motion only when the user permits it', () => {
     const css = readFileSync(new URL('../../resources/css/components.css', import.meta.url), 'utf8');
-    assert.equal([...css.matchAll(/animation:/g)].length, 1);
+    assert.equal([...css.matchAll(/animation:/g)].length, 2);
     assert.match(css, /@media \(prefers-reduced-motion: no-preference\)\s*{\s*\.ui-spinner\s*{\s*animation:/);
+});
+
+test('skeleton animation is opt-in and uses layout-stable opacity', () => {
+    const css = readFileSync(new URL('../../resources/css/components.css', import.meta.url), 'utf8');
+    assert.match(css, /@media \(prefers-reduced-motion: no-preference\)\s*{\s*\.ui-skeleton\s*{\s*animation:/);
+    assert.match(css, /@keyframes ui-skeleton-pulse\s*{\s*50%\s*{\s*opacity:/);
 });

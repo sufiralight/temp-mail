@@ -13,3 +13,5 @@ Calculated contrast ratios for the preview (light / dark) are 16.97 / 19.06 for 
 The control-boundary role uses Zinc 600 in Light and Zinc 400 in Dark. It provides at least 6.91:1 against surface, and at least 5.81:1 across canvas, surface and muted surface. The danger-foreground role uses Error in Light and a 55% Error / 45% Zinc 50 mix in Dark. The dialog scrim uses Zinc 950 at 65% opacity. These roles preserve the approved primitives and mappings.
 
 The preview uses native labeled controls, 36–48px button sizes, a shared visible focus outline, and a native modal with focus restoration. Loading spinners animate only when motion is permitted. Before adding new controls, verify keyboard and screen-reader operation, focus restoration, and text and boundary contrast on the actual surrounding surface.
+
+At 320px, 375px, 768px, 1024px and 1440px, headless Edge checks verified Light and Dark reflow, bounds of interactive controls, modal sizing, and Escape focus restoration. System appearance, reduced-motion skeletons and keyboard focus styling were also checked. Screen-reader and manual zoom review remain separate verification steps.

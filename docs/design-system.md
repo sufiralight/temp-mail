@@ -13,3 +13,7 @@ The bundled upright variable WOFF2 files come from Fontsource 5.3.0 with SIL Ope
 Blade inlines the trusted local `resources/js/appearance.js` in the head before Vite styles. Keep this file in the deployed application source. It reads `temp-mail.appearance` from localStorage and sets `html[data-theme]` to the resolved `light` or `dark` value. The storage values are `light`, `dark`, and `system`. Missing, invalid, or inaccessible preferences use System. Storage exceptions leave new choices usable in memory. Preferences are per browser origin.
 
 Use `window.appearance.getPreference()` to read the selected mode and `window.appearance.setPreference(value)` to apply and persist it. System reacts to OS changes. CSS uses the OS preference when JavaScript is unavailable. The welcome preview uses a native select and changes appearance without moving focus or animating the palette.
+
+## Layout scale
+
+Containers use Tailwind max widths of 28, 42, 64 and 80rem, plus full width. Inline gutters are 1rem by default, 1.5rem at sm (40rem) and 2rem at lg (64rem). Grid columns change at md (48rem) and lg. Gaps use 0, 0.5, 1, 1.5 and 2rem. Section block padding uses 0, 1/1.5, 1.5/2 or 2.5/3.5rem, with the second value from sm. Use rounded-md for controls and rounded-xl for surfaces. Default surfaces have no elevation. Dialog separation comes from the native backdrop and border.

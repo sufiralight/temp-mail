@@ -6,7 +6,7 @@
     }
 
     .ui-button {
-        @apply inline-flex items-center justify-center gap-2 border font-semibold;
+        @apply inline-flex min-w-0 max-w-full items-center justify-center gap-2 border py-1.5 text-center font-semibold wrap-anywhere;
         border-color: var(--control-boundary);
         background: var(--surface);
     }
@@ -20,6 +20,10 @@
         --ui-height: 3rem;
         --ui-padding: 1rem;
     }
+
+    .ui-button > .ui-spinner-status { margin-inline: 2px; }
+
+    .ui-button[data-size="sm"] > .ui-spinner-status { margin-inline: 0; }
 
     .ui-button[data-icon-only] {
         min-inline-size: var(--ui-height, 2.75rem);
@@ -129,7 +133,15 @@
     }
 
     .ui-modal {
-        @apply fixed inset-0 m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg overflow-auto rounded-xl border border-border bg-surface p-6 text-foreground;
+        @apply fixed inset-0 m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg overflow-auto overscroll-contain rounded-xl border border-border bg-surface p-4 text-foreground wrap-anywhere sm:p-6;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .ui-skeleton { animation: ui-skeleton-pulse 1.8s ease-in-out infinite; }
+    }
+
+    @keyframes ui-skeleton-pulse {
+        50% { opacity: .65; }
     }
 
     .ui-modal::backdrop {

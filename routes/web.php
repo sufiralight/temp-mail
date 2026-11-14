@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\InstallationController;
-use App\Installation\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,8 +21,4 @@ Route::prefix('install')->name('installation.')->controller(InstallationControll
     Route::post('/commit', 'install')->middleware('throttle:3,1,install-commit:')->name('commit');
 });
 
-Route::get('/login', function (State $state) {
-    abort_unless($state->status() === 'complete' && is_file(app()->environmentFilePath()), 404);
-
-    return response()->view('installation.login', status: 503, headers: ['Cache-Control' => 'no-store']);
-})->name('login');
+require __DIR__.'/auth.php';

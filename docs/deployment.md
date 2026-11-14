@@ -33,3 +33,9 @@ Shared-hosting deployment remains unverified until these checks run on the targe
 The component preview is guarded at request time and returns 404 outside Laravel local mode or for a non-loopback socket peer. Deploy the Lucide notice in public/licenses with the font notices. Component interactions are included in the existing compiled JavaScript entry.
 
 Before enabling the installer, verify that the cPanel host can pass an authenticated REMOTE_USER over HTTPS and that private filesystem locking and atomic replacement work. Follow the [installation and recovery runbook](installation-flow.md). Keep the private installation marker in persistent storage across deployments.
+
+## Authentication deployment
+
+Set APP_URL to the canonical HTTPS origin and APP_DEBUG=false. Production auth routes check the request host, port and scheme. Configure trusted proxies only for the hosting topology. Keep SESSION_SECURE_COOKIE=true, SESSION_HTTP_ONLY=true and SESSION_SAME_SITE=lax. Database sessions use the installer-created sessions table. File sessions also work on a single host with private writable storage. Keep the file cache lock directory writable for reset serialization and use database or file cache for throttles.
+
+Set MAIL_MAILER=smtp and configure MAIL_HOST, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, MAIL_SCHEME, MAIL_REQUIRE_TLS, MAIL_FROM_ADDRESS and MAIL_FROM_NAME in .env. Use smtps for implicit TLS or smtp with required STARTTLS, according to the hosting provider. Authentication mail runs synchronously. Use MAIL_MAILER=array locally and Notification::fake in tests. The array transport does not deliver mail. Keep /reset-password and /email/verify request URLs and query strings out of access logs and analytics through host configuration. Rebuild configuration cache after provisioning and test actual delivery using controlled accounts.

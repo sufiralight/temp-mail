@@ -4,7 +4,7 @@ The wizard has three visible steps.
 
 1. **Database Configuration** runs a read-only SELECT 1 on a temporary MySQL or MariaDB connection with a three-second PDO connection timeout. Only authorized operators can test connections. Continue uses the last verified configuration.
 2. **Administrator Account** validates the name, normalized email and confirmed password. Back revokes verification while preserving non-sensitive database fields. Install acquires the private filesystem lock, rechecks authorization, opens the verified database again and acquires a database advisory lock before checking for an empty schema.
-3. **Installation Complete** confirms the migrated schema and first Super Admin. The completing browser session can view this screen for ten minutes while operator authorization is still active. Continue to Login leads to a deliberate 503 sign-in handoff until Phase 3 supplies authentication.
+3. **Installation Complete** confirms the migrated schema and first Super Admin. The completing browser session can view this screen for ten minutes while operator authorization is still active. Continue to Login leads to the Phase 3 sign-in screen.
 
 ## Operator authorization
 

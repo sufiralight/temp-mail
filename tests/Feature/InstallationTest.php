@@ -164,7 +164,7 @@ class InstallationTest extends TestCase
             'password' => 'fixture-password-123', 'password_confirmation' => 'fixture-password-123',
         ])->assertRedirect('/install');
         $this->get('https://example.test/install')->assertSee('Installation Complete')->assertSee('Continue to Login');
-        $this->get('https://example.test/login')->assertStatus(503)->assertSee('authentication module');
+        $this->get('https://example.test/login')->assertOk()->assertSee('Sign in');
         $this->submit('commit')->assertNotFound();
         $this->assertSame('complete', app(State::class)->status());
         $env = Dotenv::parse(File::get($this->directory.'/.env'));

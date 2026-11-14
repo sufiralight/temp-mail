@@ -12,3 +12,4 @@
 | 2026-11-14 | Implemented | Protect installation with an authenticated HTTPS server identity or explicit direct loopback development access. Persist a private state marker and require offline recovery after an interrupted write. |
 | 2026-11-14 | Implemented | Reuse the x-ui Blade library with a controlled Lucide catalog, native dialog and form controls, and semantic control boundaries. |
 | 2026-11-14 | Implemented | Use responsive Blade layout primitives built on the existing Tailwind width, gap and breakpoint scales. |
+| 2026-11-14 | Implemented | Use one web guard, signed email verification for registered accounts, and a minimal temporary account page. Allow the installed Super Admin to reach that page before email verification. |

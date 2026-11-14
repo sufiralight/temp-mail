@@ -17,3 +17,5 @@ The preview uses native labeled controls, 36–48px button sizes, a shared visib
 At 320px, 375px, 768px, 1024px and 1440px, headless Edge checks verified Light and Dark reflow, bounds of interactive controls, modal sizing, and Escape focus restoration. System appearance, reduced-motion skeletons and keyboard focus styling were also checked. Screen-reader and manual zoom review remain separate verification steps.
 
 Installer steps use native form controls, shared field error associations and an inline loading indicator for installation. Verify keyboard operation, responsive reflow and server validation feedback on the deployed host.
+
+Authentication pages use shared controls, linked errors, native autofill attributes and the existing password visibility interaction. Reset responses set no-store and no-referrer. Review screen-reader announcements and focus order on the deployed pages.

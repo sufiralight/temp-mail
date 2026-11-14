@@ -9,3 +9,7 @@ Use MySQL or MariaDB for deployed application data. Keep configuration private, 
 Production targets conventional Linux shared hosting with cPanel. Use configuration and Laravel path helpers for portable filesystem paths. Shared hosting must support execution without Node.js, npm, Redis, Docker, Supervisor, WebSockets or persistent workers. Design future scheduled work for cPanel cron with bounded execution. See [deployment](deployment.md) and [installation flow](installation-flow.md).
 
 The installer uses dedicated temporary database connections and separate private file sessions. Its authoritative installation marker is independent of the application database and .env. See [the installation runbook](installation-flow.md).
+
+## Authentication
+
+The installed application uses Laravel’s web session guard, users password broker, and signed email verification. The completion marker and private environment configuration gate all auth routes. Public registration accepts only name, email and password. The super-admin gate reads the existing is_super_admin flag. The protected account page requires verified email for ordinary users and permits the operator-provisioned Super Admin immediately. Browser login redirects to the named account route. Logout is a CSRF-protected POST.
